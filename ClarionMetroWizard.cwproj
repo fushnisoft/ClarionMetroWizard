@@ -1,0 +1,54 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{93B2E885-B49A-4F93-AD18-705A6AC929CE}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ClarionMetroWizard</RootNamespace>
+    <AssemblyName>ClarionMetroWizard</AssemblyName>
+    <OutputName>ClarionMetroWizard</OutputName>
+    <CWOutputType>Exe</CWOutputType>
+    <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+    <ApplicationIcon>resources\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <vid>full</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <vid>off</vid>
+    <check_stack>False</check_stack>
+    <check_index>False</check_index>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ce_BaseWindowComponent.clw" />
+    <None Include="ce_MetroWizardForm.clw" />
+    <None Include="ce_MetroWizardForm.inc" />
+    <Compile Include="ce_TabList.clw" />
+    <Compile Include="ClarionMetroWizard.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="ClarionMetroWizard001.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="CLARIONMETROWIZARD_BC.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="ClarionMetroWizard_BC0.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <None Include="ce_BaseWindowComponent.inc" />
+    <None Include="ce_TabList.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ClarionMetroWizard.EXE.manifest" />
+    <Library Include="resources\AppIcon.ico" />
+  </ItemGroup>
+  <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+</Project>
