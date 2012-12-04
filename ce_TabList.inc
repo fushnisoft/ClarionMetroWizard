@@ -4,7 +4,7 @@ _ce_TabList_  EQUATE(1)
 
   PRAGMA('project(#pragma link(resources\header_grey.bmp))')
 
-tabQ_Type                    QUEUE,TYPE
+ce_tabQ_Type                    QUEUE,TYPE
 name                           CSTRING(255)
 cellStyle                      LONG
 cellTooltip                    CSTRING(255)
@@ -18,7 +18,7 @@ cellTooltip                    CSTRING(255)
 !--------------------------------------------------------------------------------
 ce_TabList          Class(ce_BaseWindowComponent),Implements(WindowComponent),Type,Module('ce_TabList.Clw'),LINK('ce_TabList.Clw',1)
 ! Properties
-tabQ                  &tabQ_Type
+tabQ                  &ce_tabQ_Type
 sheetFeq              SIGNED
 listFeq               SIGNED
 listLineHeightAdjustment  LONG

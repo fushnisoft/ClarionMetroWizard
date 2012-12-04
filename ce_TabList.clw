@@ -97,7 +97,7 @@ tabFeq                      SIGNED
   CODE
   
   IF SELF.tabQ &= NULL
-    SELF.tabQ &= New(tabQ_Type)
+    SELF.tabQ &= New(ce_tabQ_Type)
     Assert(~SELF.tabQ &= NULL,'Instantiating SELF.tabQ in ce_TabList.SetListFrom()')
   ELSE
     Free(SELF.tabQ)
