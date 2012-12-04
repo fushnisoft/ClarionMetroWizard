@@ -1,4 +1,5 @@
-! http://ClarionEdge.com
+! http://clarionedge.com, http://fushnisoft.com
+! Licensed under the MIT license: https://github.com/fushnisoft/ClarionMetroWizard/blob/master/LICENSE.txt 
 
       Member()
          omit('***$***',_VER_C55)
@@ -26,13 +27,68 @@ ce_MetroWizardForm.Construct  PROCEDURE
   SELF.darkColor = 04F453Ch
   SELF.fontColor = COLOR:White
   SELF.fontSelectedColor = COLOR:Black
+  
+  SELF.promptTabHeaderUpper = FALSE
+  SELF.promptTabDetailUpper = TRUE
+  
   SELF.headerImage = '~resources\header_ce_metro_24x24.ico'
   
   SELF.buttonCloseIcon =  '~resources\cancel_ce_metro_24x24.ico'
   SELF.buttonNextIcon = '~resources\navigation-right_ce_metro_24x24.ico'
   SELF.buttonPreviousIcon = '~resources\navigation-left_ce_metro_24x24.ico'
   SELF.buttonOKIcon = '~resources\thumb_up_ce_metro_24x24.ico'
-  
+
+  SELF.themeColors[1, CMW_COLOR_DARK] = 0252525h
+  SELF.themeColors[1, CMW_COLOR_LIGHT] = 000b3f4h
+  SELF.themeColors[2, CMW_COLOR_DARK] = 0252525h
+  SELF.themeColors[2, CMW_COLOR_LIGHT] = 00ab78h
+  SELF.themeColors[3, CMW_COLOR_DARK] = 0252525h
+  SELF.themeColors[3, CMW_COLOR_LIGHT] = 0ed7327h
+  SELF.themeColors[4, CMW_COLOR_DARK] = 0252525h
+  SELF.themeColors[4, CMW_COLOR_LIGHT] = 03e11aeh
+  SELF.themeColors[5, CMW_COLOR_DARK] = 0001631h
+  SELF.themeColors[5, CMW_COLOR_LIGHT] = 0002f63h
+  SELF.themeColors[6, CMW_COLOR_DARK] = 0040055h
+  SELF.themeColors[6, CMW_COLOR_LIGHT] = 0011db1h
+  SELF.themeColors[7, CMW_COLOR_DARK] = 03a024fh
+  SELF.themeColors[7, CMW_COLOR_LIGHT] = 04f00c1h
+  SELF.themeColors[8, CMW_COLOR_DARK] = 051022eh
+  SELF.themeColors[8, CMW_COLOR_LIGHT] = 0ad0072h
+  SELF.themeColors[9, CMW_COLOR_DARK] = 065001dh
+  SELF.themeColors[9, CMW_COLOR_LIGHT] = 0b51746h
+  SELF.themeColors[10, CMW_COLOR_DARK] = 04f2100h
+  SELF.themeColors[10, CMW_COLOR_LIGHT] = 0c06a00h
+  SELF.themeColors[11, CMW_COLOR_DARK] = 05e4800h
+  SELF.themeColors[11, CMW_COLOR_LIGHT] = 0878300h
+  SELF.themeColors[12, CMW_COLOR_DARK] = 0004900h
+  SELF.themeColors[12, CMW_COLOR_LIGHT] = 0009918h
+  SELF.themeColors[13, CMW_COLOR_DARK] = 02c9917h
+  SELF.themeColors[13, CMW_COLOR_LIGHT] = 040c100h
+  SELF.themeColors[14, CMW_COLOR_DARK] = 01b6be6h
+  SELF.themeColors[14, CMW_COLOR_LIGHT] = 01d99ffh
+  SELF.themeColors[15, CMW_COLOR_DARK] = 01e1db9h
+  SELF.themeColors[15, CMW_COLOR_LIGHT] = 0132effh
+  SELF.themeColors[16, CMW_COLOR_DARK] = 06a1ab3h
+  SELF.themeColors[16, CMW_COLOR_LIGHT] = 0771dffh
+  SELF.themeColors[17, CMW_COLOR_DARK] = 0b41c68h
+  SELF.themeColors[17, CMW_COLOR_LIGHT] = 0ff3faah
+  SELF.themeColors[18, CMW_COLOR_DARK] = 0ba5719h
+  SELF.themeColors[18, CMW_COLOR_LIGHT] = 0ffae20h
+  SELF.themeColors[19, CMW_COLOR_DARK] = 0e59b59h
+  SELF.themeColors[19, CMW_COLOR_LIGHT] = 0ffc557h
+  SELF.themeColors[20, CMW_COLOR_DARK] = 0a8a800h
+  SELF.themeColors[20, CMW_COLOR_LIGHT] = 0cdd800h
+  SELF.themeColors[21, CMW_COLOR_DARK] = 01bba82h
+  SELF.themeColors[21, CMW_COLOR_LIGHT] = 000d191h
+  SELF.themeColors[22, CMW_COLOR_DARK] = 0099dd3h
+  SELF.themeColors[22, CMW_COLOR_LIGHT] = 000b7e1h
+  SELF.themeColors[23, CMW_COLOR_DARK] = 0bb65e1h
+  SELF.themeColors[23, CMW_COLOR_LIGHT] = 0bc76ffh
+  SELF.themeColors[24, CMW_COLOR_DARK] = 0686868h
+  SELF.themeColors[24, CMW_COLOR_LIGHT] = 0a5a400h
+  SELF.themeColors[25, CMW_COLOR_DARK] = 0686868h
+  SELF.themeColors[25, CMW_COLOR_LIGHT] = 0237dffh
+
 ce_MetroWizardForm.Init   PROCEDURE (WindowManager pWM, SIGNED pSheetFeq)
 savePixels                  BYTE
   CODE
@@ -42,7 +98,7 @@ savePixels                  BYTE
   pSheetFeq{PROP:Width} = 0{PROP:Width}
   
   ! Init the parent TabList class
-  SELF.Init(pWm, pSheetFeq, , , TRUE)
+  SELF.Init(pWm, pSheetFeq, TRUE)
   
   savePixels = 0{PROP:Pixels}
   0{PROP:Pixels} = TRUE
@@ -50,6 +106,7 @@ savePixels                  BYTE
   SELF.CreateControls()
   SELF.SetupWindow()
   SELF.SetupButtons()
+  SELF.ApplyColors(SELF.darkColor, SELF.lightColor)
 
   0{PROP:Pixels} = FALSE
 
@@ -78,10 +135,6 @@ thisFeq SIGNED
     END
     thisFeq{PROP:Ypos} = thisFeq{PROP:Ypos} + SELF.headerHeight
   END
-  
-                                            
-                                          
-                                            
 
 ce_MetroWizardForm.SetupWindow    PROCEDURE()
 posG                                Group(PositionGroup)
@@ -94,7 +147,6 @@ posG                                Group(PositionGroup)
   SELF.boxFeq{PROP:Ypos} = SELF.boxHeaderFeq{PROP:Height}
   SELF.boxFeq{PROP:Height} = SELF.boxFooterFeq{PROP:YPos} - SELF.boxFooterFeq{PROP:YPos} - 1
   SELF.boxFeq{PROP:Width} = 0{PROP:Width} - SELF.boxFeq{PROP:Xpos} + 2
-  SELF.boxFeq{PROP:Color} = COLOR:WINDOW
   
   SELF.backgroundImageFeq{PROP:Xpos} = SELF.boxFeq{PROP:Xpos}
   SELF.backgroundImageFeq{PROP:Ypos} = SELF.boxFeq{PROP:Ypos}
@@ -118,26 +170,14 @@ posG                                Group(PositionGroup)
   SELF.promptListTitleFeq{PROP:YPos} = SELF.boxListTitleFeq{PROP:YPos} + (SELF.boxListTitleFeq{PROP:Height}/3)
   
   SELF.listFeq{PROP:Trn} = FALSE
-  SELF.listFeq{PROP:Background} = 0D1B171h ! Kind of blue-ish
-  SELF.listFeq{PROP:Color} = 0D1B171h ! Kind of blue-ish
   
   !SELF.listFeq{PROPSTYLE:FontSize, 1} = SELF.listFeq{PROPSTYLE:FontSize, 1} * 2
-  SELF.listFeq{PROPLIST:TextSelected, 1} = COLOR:Black
-  SELF.listFeq{PROPLIST:BackSelected, 1} = COLOR:White
-  SELF.listFeq{PROPLIST:TextColor, 1} = COLOR:White
-  SELF.listFeq{PROPLIST:BackColor, 1} = SELF.listFeq{PROP:Background}
   SELF.listFeq{PROPLIST:LeftOffset, 1} = 4
   
     !SELF.listFeq{PROPSTYLE:FontSize, 2} = SELF.listFeq{PROPSTYLE:FontSize, 1} * 2
-  SELF.listFeq{PROPLIST:TextSelected, 2} = COLOR:Black
-  SELF.listFeq{PROPLIST:BackSelected, 2} = COLOR:White
-  SELF.listFeq{PROPLIST:TextColor, 2} = COLOR:White
-  SELF.listFeq{PROPLIST:BackColor, 2} = SELF.listFeq{PROP:Background}
   SELF.listFeq{PROPLIST:LeftOffset, 2} = 6
   
   SELF.listFeq{PROP:LineHeight} = SELF.listFeq{PROP:LineHeight} + 6
-  SELF.listFeq{PROPLIST:Grid, 1} = SELF.listFeq{PROP:Background}
-  SELF.listFeq{PROPLIST:Grid, 2} = SELF.listFeq{PROP:Background}
    
   SELF.promptHeaderFeq{PROP:Xpos} = 40
   SELF.promptHeaderFeq{PROP:Ypos} = 6
@@ -147,10 +187,9 @@ posG                                Group(PositionGroup)
   
   SELF.listFeq{PROP:Height} = SELF.listFeq{PROP:Height} - 1
   GetPosition(SELF.listFeq, posG.XPos, posG.YPos, posG.Width, posG.Height)
-  SELF.regionListBorderFeq = Create(0, CREATE:region)
-  SetPosition(SELF.regionListBorderFeq, posG.XPos, posG.YPos-1, posG.Width+1, posG.Height+2)
-  SELF.regionListBorderFeq{PROP:Hide} = FALSE
-  SELF.regionListBorderFeq{PROP:Color} = SELF.listFeq{PROP:Background}
+  SELF.listBorderFeq = Create(0, CREATE:region)
+  SetPosition(SELF.listBorderFeq, posG.XPos, posG.YPos-1, posG.Width+1, posG.Height+2)
+  SELF.listBorderFeq{PROP:Hide} = FALSE
  
 ce_MetroWizardForm.SetupButtons   PROCEDURE()
   CODE
@@ -182,9 +221,6 @@ ce_MetroWizardForm.SetButtonStyle PROCEDURE(SIGNED pFeq, STRING pIcon) !,VIRTUAL
    pFeq{PROP:Ypos} = 0{PROP:Height} - pFeq{PROP:Height} - 10    
    pFeq{PROP:Flat} = TRUE
    pFeq{PROP:Trn} = TRUE
-   pFeq{PROP:FontColor} = SELF.fontColor
-   pFeq{PROP:FontStyle} = FONT:bold
-   pFeq{PROP:Background} = SELF.darkColor
    IF pFeq{PROP:Icon} = '' 
      pFeq{PROP:Icon} = pIcon
    END
@@ -198,39 +234,27 @@ ce_MetroWizardForm.CreateControls PROCEDURE()!,VIRTUAL
   ! ==========================================
   SELF.boxHeaderFeq = Create(0, CREATE:box)
   SetPosition(SELF.boxHeaderFeq, 0, 0, 0{PROP:Width}, SELF.headerHeight)
-  SELF.boxHeaderFeq{PROP:Color} = SELF.darkColor
-  SELF.boxHeaderFeq{PROP:Fill} = SELF.darkColor
   SELF.boxHeaderFeq{PROP:Hide} = FALSE
 
   SELF.boxFooterFeq = Create(0, CREATE:box)
   SETPOSITION(SELF.boxFooterFeq, 0, 0{PROP:Height} - SELF.footerHeight, 0{PROP:Width}, SELF.footerHeight) 
-  SELF.boxFooterFeq{PROP:Color} = SELF.darkColor
-  SELF.boxFooterFeq{PROP:Fill} = SELF.darkColor  
   SELF.boxFooterFeq{PROP:Hide} = FALSE
   
   SELF.boxListTitleFeq = CREATE(0, CREATE:box)
   ! SETPOSITION <-- happens later
-  SELF.boxListTitleFeq{PROP:Color} = SELF.lightColor
-  SELF.boxListTitleFeq{PROP:Fill} = SELF.lightColor
   SELF.boxListTitleFeq{PROP:Hide} = FALSE
 
   SELF.promptListTitleFeq = CREATE(0, CREATE:prompt)
-  SELF.promptListTitleFeq{PROP:FontColor} = SELF.fontColor
   SELF.promptListTitleFeq{PROP:FontSize} = SELF.listTitleFontSize
-  SELF.promptListTitleFeq{PROP:Color} = SELF.lightColor
   SELF.promptListTitleFeq{PROP:Text} = 'List Title'
   SELF.promptListTitleFeq{PROP:Hide} = FALSE
 
   SELF.promptHeaderFeq = CREATE(0, CREATE:prompt)
-  SELF.promptHeaderFeq{PROP:FontColor} = SELF.fontColor
-  SELF.promptHeaderFeq{PROP:Color} = SELF.darkColor
   SELF.promptHeaderFeq{PROP:FontSize} = SELF.headerFontSize
   SELF.promptHeaderFeq{PROP:Text} = 'Header'
   SELF.promptHeaderFeq{PROP:Hide} = FALSE
 
   SELF.promptFooterFeq = CREATE(0, CREATE:prompt)
-  SELF.promptFooterFeq{PROP:FontColor} = SELF.fontColor
-  SELF.promptFooterFeq{PROP:Color} = SELF.darkColor
   SELF.promptFooterFeq{PROP:FontSize} = SELF.footerFontSize
   SELF.promptFooterFeq{PROP:Text} = 'Footer'
   SELF.promptFooterFeq{PROP:Hide} = FALSE
@@ -240,6 +264,77 @@ ce_MetroWizardForm.CreateControls PROCEDURE()!,VIRTUAL
   SELF.headerImageFeq{PROP:Text} = SELF.headerImage
   SELF.headerImageFeq{PROP:Hide} = FALSE
   ! ==========================================
+
+ce_MetroWizardForm.SetTheme   PROCEDURE(BYTE pThemeNumber)!,VIRTUAL
+  CODE
+  IF pThemeNumber > 0 AND pThemeNumber < 26
+    SELF.ApplyColors(SELF.themeColors[pThemeNumber, CMW_COLOR_DARK], SELF.themeColors[pThemeNumber, CMW_COLOR_LIGHT])
+  END
+  
+ce_MetroWizardForm.ApplyColors                   PROCEDURE(LONG pDarkColor, LONG pLightColor)!,VIRTUAL
+buttonFeq                           SIGNED
+i                                   LONG
+  CODE
+  
+  SELF.lightColor = pLightColor
+  SELF.darkColor = pDarkColor
+  
+  SELF.boxFeq{PROP:Color} = COLOR:WINDOW
+
+  SELF.listFeq{PROP:Background} = SELF.lightColor
+  SELF.listFeq{PROP:Color} = SELF.lightColor
+
+  SELF.listFeq{PROPLIST:TextSelected, 1} = SELF.fontSelectedColor
+  SELF.listFeq{PROPLIST:BackSelected, 1} = SELF.fontColor
+  SELF.listFeq{PROPLIST:TextColor, 1} = SELF.fontColor
+  SELF.listFeq{PROPLIST:BackColor, 1} = SELF.listFeq{PROP:Background}
+
+  SELF.listFeq{PROPLIST:TextSelected, 2} = SELF.fontSelectedColor
+  SELF.listFeq{PROPLIST:BackSelected, 2} = SELF.fontColor
+  SELF.listFeq{PROPLIST:TextColor, 2} = SELF.fontColor
+  SELF.listFeq{PROPLIST:BackColor, 2} = SELF.listFeq{PROP:Background}
+
+  SELF.listFeq{PROPLIST:Grid, 1} = SELF.listFeq{PROP:Background}
+  SELF.listFeq{PROPLIST:Grid, 2} = SELF.listFeq{PROP:Background}
+
+  SELF.listBorderFeq{PROP:Color} = SELF.listFeq{PROP:Background}
+
+  LOOP
+    i += 1
+    EXECUTE i
+      buttonFeq = SELF.buttonClose
+      buttonFeq = SELF.buttonNext
+      buttonFeq = SELF.buttonOK
+      buttonFeq = SELF.buttonPrevious
+    ELSE
+      BREAK
+    END
+    IF buttonFeq = 0
+      CYCLE
+    END
+    
+    buttonFeq{PROP:FontColor} = SELF.fontColor
+    buttonFeq{PROP:FontStyle} = FONT:bold
+    buttonFeq{PROP:Background} = SELF.darkColor
+  END
+  
+  SELF.boxHeaderFeq{PROP:Color} = SELF.darkColor
+  SELF.boxHeaderFeq{PROP:Fill} = SELF.darkColor
+
+  SELF.boxFooterFeq{PROP:Color} = SELF.darkColor
+  SELF.boxFooterFeq{PROP:Fill} = SELF.darkColor  
+
+  SELF.boxListTitleFeq{PROP:Color} = SELF.lightColor
+  SELF.boxListTitleFeq{PROP:Fill} = SELF.lightColor
+
+  SELF.promptListTitleFeq{PROP:FontColor} = SELF.fontColor
+  SELF.promptListTitleFeq{PROP:Color} = SELF.lightColor
+
+  SELF.promptHeaderFeq{PROP:FontColor} = SELF.fontColor
+  SELF.promptHeaderFeq{PROP:Color} = SELF.darkColor
+
+  SELF.promptFooterFeq{PROP:FontColor} = SELF.fontColor
+  SELF.promptFooterFeq{PROP:Color} = SELF.darkColor
 
 ce_MetroWizardForm.TakeAccepted  PROCEDURE() !,VIRTUAL
   CODE
@@ -259,16 +354,17 @@ ce_MetroWizardForm.TakeAccepted  PROCEDURE() !,VIRTUAL
   RETURN 
 
 ce_MetroWizardForm.TakeNewSelection   PROCEDURE() !,VIRTUAL
-selectedTabFeq SIGNED
+selectedTabFeq                          SIGNED
   CODE
+  
   CASE Field()
   OF SELF.sheetFeq 
     selectedTabFeq = SELF.sheetFeq{PROP:ChoiceFEQ}
     IF SELF.promptTabHeader > 0      
-      SELF.promptTabHeader{PROP:Text} = selectedTabFeq{PROP:Text}
+      SELF.promptTabHeader{PROP:Text} = Choose(SELF.promptTabHeaderUpper=TRUE, Upper(selectedTabFeq{PROP:Text}), selectedTabFeq{PROP:Text})
     END
     IF SELF.promptTabDetail > 0
-      SELF.promptTabDetail{PROP:Text} = selectedTabFeq{PROP:Tip}
+      SELF.promptTabDetail{PROP:Text} = Choose(SELF.promptTabDetailUpper=TRUE, Upper(selectedTabFeq{PROP:Tip}), selectedTabFeq{PROP:Tip})
     END    
       
     IF selectedTabFeq{PROP:ChildIndex} = SELF.sheetFeq{PROP:NumTabs}

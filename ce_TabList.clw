@@ -1,4 +1,5 @@
-! http://ClarionEdge.com
+! http://clarionedge.com, http://fushnisoft.com
+! Licensed under the MIT license: https://github.com/fushnisoft/ClarionMetroWizard/blob/master/LICENSE.txt 
 
       Member()
          omit('***$***',_VER_C55)
@@ -10,10 +11,26 @@ _ABCLinkMode_ EQUATE(1)
       Include('Errors.CLW'),ONCE
       Map
       End ! map
-      Include('ce_TabList.inc'),ONCE
-ce_TabList.Init     PROCEDURE  (WindowManager pWM, SIGNED pSheetFeq, <SIGNED pBoxFeq>, <SIGNED pImageFeq>, BYTE pSkipChecksAndOptions=FALSE) ! Declare Procedure
+  Include('ce_TabList.inc'),ONCE
+
+ce_TabList.Construct  PROCEDURE()
+  CODE
+  SELF.boxMargin = 4
+  SELF.backgroundImage = '~resources\header_grey.bmp'
+  SELF.listLineHeightAdjustment = 6
+  SELF.listValuesUpperCase = TRUE
+  SELF.listValuesBold = FALSE
+  
+ce_TabList.Destruct   PROCEDURE                           
+  CODE
+  IF NOT SELF.tabQ &= NULL
+    DISPOSE(SELF.tabQ)
+  END
+  
+ce_TabList.Init     PROCEDURE  (WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE)
 savePixels                   BYTE
   CODE
+  
   savePixels     = 0{PROP:Pixels}
   0{PROP:Pixels} = TRUE
 
@@ -28,20 +45,16 @@ savePixels                   BYTE
 
   SELF.boxFeq = Create(0, CREATE:box)
   SELF.backgroundImageFeq = Create(0, CREATE:image)
-  SELF.backgroundImageFeq{PROP:Text} = TABLIST_HEADER_IMAGE
-
+  SELF.backgroundImageFeq{PROP:Text} = SELF.backgroundImage
   SELF.listFeq = Create(0, CREATE:list)
-  IF SELF.listFeq = 0
-    Stop('ce_TabList.Init - Error creating list control!')
-  END
 
   SELF.listFeq{PROP:Xpos}   = SELF.sheetFeq{PROP:Xpos}
   SELF.listFeq{PROP:Ypos}   = SELF.sheetFeq{PROP:Ypos}
-  SELF.listFeq{PROP:Width}  = SELF.sheetFeq{PROP:LeftOffSet} - (TABLIST_SEPERATION/2)
+  SELF.listFeq{PROP:Width}  = SELF.sheetFeq{PROP:LeftOffSet} - (SELF.boxMargin/2)
   SELF.listFeq{PROP:Height} = SELF.sheetFeq{PROP:Height} 
 
-  SELF.sheetFeq{PROP:Xpos}   = SELF.sheetFeq{PROP:Xpos} + (TABLIST_SEPERATION/2)
-  SELF.sheetFeq{PROP:Width}  = SELF.sheetFeq{PROP:Width} - TABLIST_SEPERATION
+  SELF.sheetFeq{PROP:Xpos}   = SELF.sheetFeq{PROP:Xpos} + (SELF.boxMargin/2)
+  SELF.sheetFeq{PROP:Width}  = SELF.sheetFeq{PROP:Width} - SELF.boxMargin
   SELF.sheetFeq{PROP:Wizard} = TRUE
   SELF.sheetFeq{PROP:Trn}    = TRUE
 
@@ -49,7 +62,7 @@ savePixels                   BYTE
   SELF.listFeq{PROP:Flat}          = TRUE
   SELF.listFeq{PROP:Hide}          = FALSE
   SELF.listFeq{PROP:Tip}           = '.' ! <-- required to make cell tips work!!
-  SELF.listFeq{PROP:LineHeight}    = SELF.listFeq{PROP:LineHeight} + 6
+  SELF.listFeq{PROP:LineHeight}    = SELF.listFeq{PROP:LineHeight} + SELF.listLineHeightAdjustment
   SELF.listFeq{PROPLIST:Underline} = TRUE
   SELF.listFeq{PROPLIST:Grid}      = COLOR:SCROLLBAR
   SELF.listFeq{PROPLIST:CellStyle, 1} = TRUE
@@ -58,26 +71,31 @@ savePixels                   BYTE
   SELF.listFeq{PROPLIST:TextSelected, 1} = COLOR:Black
   SELF.listFeq{PROPLIST:BackSelected, 1} = 03F9FFEh
   SELF.listFeq{PROPLIST:LeftOffset, 1} = 2
-  SELF.listFeq{PROPSTYLE:FontStyle, 1} = FONT:bold
-  SELF.listFeq{PROPSTYLE:FontStyle, 2} = FONT:bold+FONT:italic
+  IF SELF.listValuesBold = TRUE
+    SELF.listFeq{PROPSTYLE:FontStyle, 1} = FONT:bold
+    SELF.listFeq{PROPSTYLE:FontStyle, 2} = FONT:bold+FONT:italic
+  ELSE
+    SELF.listFeq{PROPSTYLE:FontStyle, 1} = FONT:regular
+    SELF.listFeq{PROPSTYLE:FontStyle, 2} = FONT:regular+FONT:italic
+  END
+  
+    
   SELF.listFeq{PROPSTYLE:TextSelected, 2} = COLOR:Black
   SELF.listFeq{PROPSTYLE:BackSelected, 2} = 03F9FFEh
 
-  !IF Omitted(pBoxFeq) = FALSE AND Omitted(pImageFeq) = FALSE
-  !  SELF.boxFeq             = pBoxFeq
-  !  SELF.backgroundImageFeq = pImageFeq
-    SELF.SetupNoSheet(pSkipChecksAndOptions)
-  !END
+  SELF.SetupNoSheet(pSkipChecksAndOptions)
 
   0{PROP:Alrt,255} = CtrlTab
   0{PROP:Alrt,255} = CtrlShiftTab
   0{PROP:Pixels} = savePixels
 
   SELF.SetListFrom()
-ce_TabList.SetListFrom PROCEDURE                          ! Declare Procedure
-i                            LONG
-tabFeq                       SIGNED
+  
+ce_TabList.SetListFrom    PROCEDURE()
+i                           LONG
+tabFeq                      SIGNED
   CODE
+  
   IF SELF.tabQ &= NULL
     SELF.tabQ &= New(tabQ_Type)
     Assert(~SELF.tabQ &= NULL,'Instantiating SELF.tabQ in ce_TabList.SetListFrom()')
@@ -96,7 +114,10 @@ tabFeq                       SIGNED
     END
     
     SELF.tabQ.name = SELF.Replace(tabFeq{PROP:Text}, '&', '')
-
+    IF SELF.listValuesUpperCase = TRUE
+      SELF.tabQ.name = Upper(SELF.tabQ.name)
+    END
+    
     SELF.tabQ.cellStyle = 1
     SELF.tabQ.cellTooltip = tabFeq{PROP:Tip}
     Add(SELF.tabQ)
@@ -104,13 +125,15 @@ tabFeq                       SIGNED
     SELF.lastTabFeq = tabFeq
   END
   SELF.listFeq{PROP:From} = SELF.tabQ
-ce_TabList.WindowComponent.TakeEvent PROCEDURE  () !,BYTE ! Declare Procedure
+  
+ce_TabList.WindowComponent.TakeEvent PROCEDURE() !,BYTE 
 rv BYTE
   CODE
   rv = PARENT.WindowComponent.TakeEvent()
 
   CASE Event()
   OF EVENT:PreAlertKey
+    
     ! Move focus to the list control
     Select(SELF.listFeq)
     IF KeyCode() = CtrlTab
@@ -121,6 +144,7 @@ rv BYTE
       ELSE
         PressKey(DownKey)
       END
+      
     ELSIF KeyCode() = CtrlShiftTab
       IF SELF.sheetFeq{PROP:ChoiceFEQ} = SELF.sheetFeq{PROP:Child, 1}
         ! This is to "wrap" the selection around the list
@@ -130,6 +154,7 @@ rv BYTE
         PressKey(UpKey)
       END
     END
+    
   OF EVENT:NewSelection
     IF Field() = SELF.listFeq
       ! Change the style of the selected cell
@@ -147,26 +172,32 @@ rv BYTE
       Post(EVENT:NewSelection, SELF.sheetFeq)
     END
     SELF.TakeNewSelection()
+    
   OF EVENT:OpenWindow
     SELF.listFeq{PROP:SelStart} = 1
     Post(EVENT:NewSelection, SELF.listFeq)
+    
   OF EVENT:Accepted
     SELF.TakeAccepted()
+    
   END
 
   RETURN rv
-ce_TabList.SetupNoSheet PROCEDURE  (BYTE pSkipChecksAndOptions=FALSE) ! Declare Procedure
-thisFeq                      SIGNED
-tempFeq                      SIGNED
-originalDisplayState         BYTE
+  
+ce_TabList.SetupNoSheet   PROCEDURE(BYTE pSkipChecksAndOptions=FALSE) 
+thisFeq                     SIGNED
+tempFeq                     SIGNED
+originalDisplayState        BYTE
   CODE
+  
   SELF.sheetFeq{PROP:NoSheet} = TRUE
 
   SetPosition(SELF.boxFeq, |
-              SELF.sheetFeq{PROP:Xpos}+SELF.sheetFeq{PROP:LeftOffSet} + TABLIST_SEPERATION, |
+              SELF.sheetFeq{PROP:Xpos}+SELF.sheetFeq{PROP:LeftOffSet} + SELF.boxMargin, |
               SELF.sheetFeq{PROP:Ypos}, |
-              SELF.sheetFeq{PROP:Width}-SELF.sheetFeq{PROP:LeftOffSet} - TABLIST_SEPERATION, |
+              SELF.sheetFeq{PROP:Width}-SELF.sheetFeq{PROP:LeftOffSet} - SELF.boxMargin, |
               SELF.sheetFeq{PROP:Height})
+  
   SELF.boxFeq{PROP:Color} = COLOR:WINDOWFRAME
   SELF.boxFeq{PROP:Fill}  = COLOR:WINDOW
   SELF.boxFeq{PROP:Hide}  = FALSE
@@ -174,8 +205,9 @@ originalDisplayState         BYTE
   SetPosition(SELF.backgroundImageFeq, |
               SELF.boxFeq{PROP:Xpos}+2, |
               SELF.boxFeq{PROP:Ypos}+1, |
-              SELF.boxFeq{PROP:Width}-4, |
-              71)
+              SELF.boxFeq{PROP:Width}-4 , |
+              SELF.backgroundImageFeq{PROP:Height})
+  
   SELF.backgroundImageFeq{PROP:Hide} = FALSE
 
   ! Set all prompts checkboxes and groups and radio controls to transparent so they look pretty on top of our background image
@@ -188,31 +220,29 @@ originalDisplayState         BYTE
       CYCLE
     END
     IF InList(thisFeq{PROP:Type}, |
-              CREATE:prompt, |
-              CREATE:option, |
-              CREATE:check, |
-              CREATE:radio, |
-              CREATE:sstring, |
-              CREATE:string) > 0 AND |
-       (thisFeq{PROP:Background} = -1 OR thisFeq{PROP:Background} = 0)
+      CREATE:prompt, |
+      CREATE:option, |
+      CREATE:check, |
+      CREATE:radio, |
+      CREATE:sstring, |
+      CREATE:string) > 0 AND |
+      (thisFeq{PROP:Background} = -1 OR thisFeq{PROP:Background} = 0)
 
       IF pSkipChecksAndOptions=TRUE AND |
-         InList(thisFeq{PROP:Type}, |
-               CREATE:option, |
-               CREATE:check, |
-               CREATE:radio) > 0
+        InList(thisFeq{PROP:Type}, |
+          CREATE:option, |
+          CREATE:check, |
+          CREATE:radio) > 0
+
         ! Skip these ones though. PROP:Trn is ugly with SkinFramework applied!
         CYCLE
       END
+      
       thisFeq{PROP:Trn} = TRUE
     END
   END
-ce_TabList.Destruct PROCEDURE                             ! Declare Procedure
-  CODE
-  IF NOT SELF.tabQ &= NULL
-    DISPOSE(SELF.tabQ)
-  END
-ce_TabList.Replace                PROCEDURE (STRING pFrom, STRING pFind, STRING pReplace) !,STRING
+  
+ce_TabList.Replace                PROCEDURE(STRING pFrom, STRING pFind, STRING pReplace) !,STRING
 ! FindString , ReplaceWith
 locate                       LONG,AUTO
 lastLocate                   LONG
@@ -236,9 +266,8 @@ lastLocate                   LONG
   END
 
   RETURN pFrom
-
+  
 ce_TabList.TakeAccepted   PROCEDURE() !,VIRTUAL
   CODE
-
-ce_TabList.TakeNewSelection   PROCEDURE () !,VIRTUAL
+ce_TabList.TakeNewSelection   PROCEDURE() !,VIRTUAL
   CODE

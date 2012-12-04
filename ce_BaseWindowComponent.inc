@@ -1,5 +1,7 @@
-! http://ClarionEdge.com
-_ce_BaseWindowComponent_ EQUATE(1)
+! http://clarionedge.com, http://fushnisoft.com
+! Licensed under the MIT license: https://github.com/fushnisoft/ClarionMetroWizard/blob/master/LICENSE.txt 
+
+_ce_BaseWindowComponent_  EQUATE(1)
   include('ABWINDOW.INC'),ONCE
 !--------------------------------------------------------------------------------
 !Class ce_BaseWindowComponent

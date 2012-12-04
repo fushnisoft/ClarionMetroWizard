@@ -1,5 +1,7 @@
-! http://ClarionEdge.com
-      Member()
+! http://clarionedge.com, http://fushnisoft.com
+! Licensed under the MIT license: https://github.com/fushnisoft/ClarionMetroWizard/blob/master/LICENSE.txt 
+
+  Member()
          omit('***$***',_VER_C55)
 _ABCDllMode_  EQUATE(0)
 _ABCLinkMode_ EQUATE(1)

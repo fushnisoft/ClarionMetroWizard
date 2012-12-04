@@ -49,6 +49,31 @@
   <ItemGroup>
     <Library Include="ClarionMetroWizard.EXE.manifest" />
     <Library Include="resources\AppIcon.ico" />
+    <Library Include="resources\Tiles\1.ico" />
+    <Library Include="resources\Tiles\10.ico" />
+    <Library Include="resources\Tiles\11.ico" />
+    <Library Include="resources\Tiles\12.ico" />
+    <Library Include="resources\Tiles\13.ico" />
+    <Library Include="resources\Tiles\14.ico" />
+    <Library Include="resources\Tiles\15.ico" />
+    <Library Include="resources\Tiles\16.ico" />
+    <Library Include="resources\Tiles\17.ico" />
+    <Library Include="resources\Tiles\18.ico" />
+    <Library Include="resources\Tiles\19.ico" />
+    <Library Include="resources\Tiles\2.ico" />
+    <Library Include="resources\Tiles\20.ico" />
+    <Library Include="resources\Tiles\21.ico" />
+    <Library Include="resources\Tiles\22.ico" />
+    <Library Include="resources\Tiles\23.ico" />
+    <Library Include="resources\Tiles\24.ico" />
+    <Library Include="resources\Tiles\25.ico" />
+    <Library Include="resources\Tiles\3.ico" />
+    <Library Include="resources\Tiles\4.ico" />
+    <Library Include="resources\Tiles\5.ico" />
+    <Library Include="resources\Tiles\6.ico" />
+    <Library Include="resources\Tiles\7.ico" />
+    <Library Include="resources\Tiles\8.ico" />
+    <Library Include="resources\Tiles\9.ico" />
   </ItemGroup>
   <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
 </Project>
