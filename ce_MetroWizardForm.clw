@@ -133,6 +133,10 @@ thisFeq SIGNED
     OROF SELF.listFeq
       CYCLE
     END
+    IF thisFeq < 0 OR thisFeq{PROP:Type} => CREATE:toolbar
+      CYCLE
+    END
+    
     thisFeq{PROP:Ypos} = thisFeq{PROP:Ypos} + SELF.headerHeight
   END
 

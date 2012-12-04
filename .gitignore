@@ -5,6 +5,7 @@
 Cla*.dll
 *.bpp
 *.ini
+*.ap~
 
 #################
 ## Eclipse
