@@ -16,7 +16,7 @@ _ABCLinkMode_ EQUATE(1)
 ce_TabList.Construct  PROCEDURE()
   CODE
   SELF.boxMargin = 4
-  SELF.backgroundImage = '~resources\header_grey.bmp'
+  SELF.backgroundImage = '~header_grey.bmp'
   SELF.listLineHeightAdjustment = 6
   SELF.listValuesUpperCase = TRUE
   SELF.listValuesBold = FALSE

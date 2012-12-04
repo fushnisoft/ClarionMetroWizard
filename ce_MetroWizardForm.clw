@@ -31,12 +31,12 @@ ce_MetroWizardForm.Construct  PROCEDURE
   SELF.promptTabHeaderUpper = FALSE
   SELF.promptTabDetailUpper = TRUE
   
-  SELF.headerImage = '~resources\header_ce_metro_24x24.ico'
+  SELF.headerImage = '~header_ce_metro_24x24.ico'
   
-  SELF.buttonCloseIcon =  '~resources\cancel_ce_metro_24x24.ico'
-  SELF.buttonNextIcon = '~resources\navigation-right_ce_metro_24x24.ico'
-  SELF.buttonPreviousIcon = '~resources\navigation-left_ce_metro_24x24.ico'
-  SELF.buttonOKIcon = '~resources\thumb_up_ce_metro_24x24.ico'
+  SELF.buttonCloseIcon =  '~cancel_ce_metro_24x24.ico'
+  SELF.buttonNextIcon = '~navigation-right_ce_metro_24x24.ico'
+  SELF.buttonPreviousIcon = '~navigation-left_ce_metro_24x24.ico'
+  SELF.buttonOKIcon = '~thumb_up_ce_metro_24x24.ico'
 
   SELF.themeColors[1, CMW_COLOR_DARK] = 0252525h
   SELF.themeColors[1, CMW_COLOR_LIGHT] = 000b3f4h

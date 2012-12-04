@@ -3,11 +3,11 @@
 
 _ce_MetroWizardForm_ EQUATE(1)
 
-  PRAGMA('project(#pragma link(resources\header_ce_metro_24x24.ico))')
-  PRAGMA('project(#pragma link(resources\cancel_ce_metro_24x24.ico))')
-  PRAGMA('project(#pragma link(resources\navigation-right_ce_metro_24x24.ico))')
-  PRAGMA('project(#pragma link(resources\navigation-left_ce_metro_24x24.ico))')
-  PRAGMA('project(#pragma link(resources\thumb_up_ce_metro_24x24.ico))')
+  PRAGMA('project(#pragma link(header_ce_metro_24x24.ico))')
+  PRAGMA('project(#pragma link(cancel_ce_metro_24x24.ico))')
+  PRAGMA('project(#pragma link(navigation-right_ce_metro_24x24.ico))')
+  PRAGMA('project(#pragma link(navigation-left_ce_metro_24x24.ico))')
+  PRAGMA('project(#pragma link(thumb_up_ce_metro_24x24.ico))')
 
   include('ce_TabList.inc'),ONCE
   include('ABWINDOW.INC'),ONCE

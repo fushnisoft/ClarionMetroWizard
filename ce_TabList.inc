@@ -2,7 +2,7 @@
 ! Licensed under the MIT license: https://github.com/fushnisoft/ClarionMetroWizard/blob/master/LICENSE.txt 
 _ce_TabList_  EQUATE(1)
 
-  PRAGMA('project(#pragma link(resources\header_grey.bmp))')
+  PRAGMA('project(#pragma link(header_grey.bmp))')
 
 ce_tabQ_Type                    QUEUE,TYPE
 name                           CSTRING(255)
