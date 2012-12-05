@@ -219,7 +219,7 @@ ce_MetroWizardForm.SetupButtons   PROCEDURE()
 ce_MetroWizardForm.SetButtonStyle PROCEDURE(SIGNED pFeq, STRING pIcon) !,VIRTUAL
   CODE
 
-   pFeq{PROP:Width} = 56
+   pFeq{PROP:Width} = 62
    pFeq{PROP:Height} = 56
    pFeq{PROP:Xpos} = 0{PROP:Width} - pFeq{PROP:Width} - 20
    pFeq{PROP:Ypos} = 0{PROP:Height} - pFeq{PROP:Height} - 10    
