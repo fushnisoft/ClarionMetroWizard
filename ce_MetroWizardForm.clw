@@ -167,7 +167,10 @@ posG                                Group(PositionGroup)
   
   SELF.listFeq{PROP:YPos} = SELF.boxHeaderFeq{PROP:Height} + SELF.boxListTitleFeq{PROP:Height} - 1
   SELF.listFeq{PROP:Height} = SELF.boxFooterFeq{PROP:YPos} - SELF.listFeq{PROP:YPos} 
-  SELF.listFeq{PROP:XPos} = SELF.listFeq{PROP:XPos} - 1
+  IF SELF.listBorderC6Style = FALSE
+    SELF.listFeq{PROP:XPos} = SELF.listFeq{PROP:XPos} - 1
+  END
+  
   SELF.listFeq{PROP:Width} = SELF.listFeq{PROP:Width} + 1
 
   SELF.promptListTitleFeq{PROP:XPos} = 8
@@ -189,10 +192,20 @@ posG                                Group(PositionGroup)
   SELF.promptFooterFeq{PROP:Xpos} = 20
   SELF.promptFooterFeq{PROP:Ypos} = 0{PROP:Height} - 30
   
-  SELF.listFeq{PROP:Height} = SELF.listFeq{PROP:Height} - 1
+  IF SELF.listBorderC6Style = FALSE
+    SELF.listFeq{PROP:Height} = SELF.listFeq{PROP:Height} - 1
+  ELSE
+    SELF.listFeq{PROP:Height} = SELF.listFeq{PROP:Height} 
+  END
+  
   GetPosition(SELF.listFeq, posG.XPos, posG.YPos, posG.Width, posG.Height)
   SELF.listBorderFeq = Create(0, CREATE:region)
-  SetPosition(SELF.listBorderFeq, posG.XPos, posG.YPos-1, posG.Width+1, posG.Height+2)
+  IF SELF.listBorderC6Style = FALSE
+    SetPosition(SELF.listBorderFeq, posG.XPos, posG.YPos-1, posG.Width+1, posG.Height+2)
+  ELSE
+    SetPosition(SELF.listBorderFeq, posG.XPos, posG.YPos, posG.Width, posG.Height)
+  END
+  
   SELF.listBorderFeq{PROP:Hide} = FALSE
  
 ce_MetroWizardForm.SetupButtons   PROCEDURE()

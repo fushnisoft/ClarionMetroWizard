@@ -139,7 +139,7 @@ rv BYTE
     IF KeyCode() = CtrlTab
       IF SELF.sheetFeq{PROP:ChoiceFEQ} = SELF.lastTabFeq
         ! This is to "wrap" the selection around the list
-        SELF.listFeq{PROP:SelStart} = 1
+        Select(SELF.listFeq, 1)
         Post(EVENT:NewSelection, SELF.listFeq)
       ELSE
         PressKey(DownKey)
@@ -148,7 +148,7 @@ rv BYTE
     ELSIF KeyCode() = CtrlShiftTab
       IF SELF.sheetFeq{PROP:ChoiceFEQ} = SELF.sheetFeq{PROP:Child, 1}
         ! This is to "wrap" the selection around the list
-        SELF.listFeq{PROP:SelStart} = Records(SELF.tabQ)
+        Select(SELF.listFeq, Records(SELF.tabQ))
         Post(EVENT:NewSelection, SELF.listFeq)
       ELSE
         PressKey(UpKey)
@@ -168,13 +168,13 @@ rv BYTE
       Put(SELF.tabQ)
       SELF.lastChoice = Choice(SELF.listFeq)
 
-      SELF.sheetFeq{PROP:SelStart} = Choice(SELF.listFeq)
+      Select(SELF.sheetFeq, Choose(Choice(SELF.listFeq)=0, 1, Choice(SELF.listFeq)))
       Post(EVENT:NewSelection, SELF.sheetFeq)
     END
     SELF.TakeNewSelection()
     
   OF EVENT:OpenWindow
-    SELF.listFeq{PROP:SelStart} = 1
+    Select(SELF.listFeq, 1)
     Post(EVENT:NewSelection, SELF.listFeq)
     
   OF EVENT:Accepted

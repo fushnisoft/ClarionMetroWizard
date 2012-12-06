@@ -34,6 +34,8 @@ headerImage                   CSTRING(255)
 listTitleFontSize             LONG
 listBorderFeq                 SIGNED
 
+listBorderC6Style             BYTE
+
 headerFontSize                LONG
 footerFontSize                LONG
 
