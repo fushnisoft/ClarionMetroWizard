@@ -207,6 +207,7 @@ posG                                Group(PositionGroup)
   END
   
   SELF.listBorderFeq{PROP:Hide} = FALSE
+  0{PROP:Height} = SELF.boxFooterFeq{PROP:Ypos} + SELF.boxFooterFeq{PROP:Height}
  
 ce_MetroWizardForm.SetupButtons   PROCEDURE()
   CODE
