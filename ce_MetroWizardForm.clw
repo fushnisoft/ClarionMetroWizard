@@ -108,7 +108,7 @@ savePixels                  BYTE
   SELF.SetupButtons()
   SELF.ApplyColors(SELF.darkColor, SELF.lightColor)
 
-  0{PROP:Pixels} = FALSE
+  0{PROP:Pixels} = savePixels
 
 ce_MetroWizardForm.MoveOriginalControls   PROCEDURE()
 thisFeq SIGNED
@@ -134,6 +134,11 @@ thisFeq SIGNED
       CYCLE
     END
     IF thisFeq < 0 OR thisFeq{PROP:Type} => CREATE:toolbar
+      CYCLE
+    END
+    CASE thisFeq{PROP:Type}
+    OF CREATE:item
+    OROF CREATE:menubar
       CYCLE
     END
     
