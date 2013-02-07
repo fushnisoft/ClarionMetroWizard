@@ -226,8 +226,12 @@ ce_MetroWizardForm.SetupButtons   PROCEDURE()
   END
   IF SELF.buttonOK > 0
     SELF.SetButtonStyle(SELF.buttonOK, SELF.buttonOKIcon)
-    SELF.buttonOK{PROP:Xpos} = SELF.buttonNext{PROP:XPos}
-    SELF.buttonOK{PROP:Hide} = TRUE
+    IF SELF.buttonNext > 0
+      SELF.buttonOK{PROP:Xpos} = SELF.buttonNext{PROP:XPos}
+      SELF.buttonOK{PROP:Hide} = TRUE
+    ELSE
+      SELF.buttonOK{PROP:Xpos} = SELF.buttonClose{PROP:Xpos} - SELF.buttonOK{PROP:Width} - 20
+    END
   END  
   IF SELF.buttonPrevious > 0
     SELF.SetButtonStyle(SELF.buttonPrevious, SELF.buttonPreviousIcon)
@@ -288,10 +292,14 @@ ce_MetroWizardForm.CreateControls PROCEDURE()!,VIRTUAL
   SELF.headerImageFeq{PROP:Hide} = FALSE
   ! ==========================================
 
-ce_MetroWizardForm.SetTheme   PROCEDURE(BYTE pThemeNumber)!,VIRTUAL
+ce_MetroWizardForm.SetTheme PROCEDURE(BYTE pThemeNumber)!,VIRTUAL
   CODE
   IF pThemeNumber > 0 AND pThemeNumber < 26
     SELF.ApplyColors(SELF.themeColors[pThemeNumber, CMW_COLOR_DARK], SELF.themeColors[pThemeNumber, CMW_COLOR_LIGHT])
+  END
+  IF pThemeNumber = 0
+    ! My hardcoded default.
+    SELF.ApplyColors(04F453Ch, 0D1B171H)
   END
   
 ce_MetroWizardForm.ApplyColors                   PROCEDURE(LONG pDarkColor, LONG pLightColor)!,VIRTUAL
@@ -392,19 +400,25 @@ selectedTabFeq                          SIGNED
       
     IF selectedTabFeq{PROP:ChildIndex} = SELF.sheetFeq{PROP:NumTabs}
       SELF.buttonOK{PROP:Hide} = FALSE
-      SELF.buttonNext{PROP:Hide} = TRUE
+      IF SELF.buttonNext > 0
+        SELF.buttonNext{PROP:Hide} = TRUE
+      END
     ELSE
-      SELF.buttonOK{PROP:Hide} = TRUE
-      SELF.buttonNext{PROP:Hide} = FALSE
+      IF SELF.buttonNext > 0
+        SELF.buttonOK{PROP:Hide} = TRUE
+        SELF.buttonNext{PROP:Hide} = FALSE
+      END
     END
-    
-    IF selectedTabFeq{PROP:ChildIndex} = 1
-      SELF.buttonPrevious{PROP:Hide} = TRUE
-    ELSE
-      SELF.buttonPrevious{PROP:Hide} = FALSE
-    END      
-  END  
-  
+
+    IF SELF.buttonPrevious > 0
+      IF selectedTabFeq{PROP:ChildIndex} = 1
+        SELF.buttonPrevious{PROP:Hide} = TRUE
+      ELSE
+        SELF.buttonPrevious{PROP:Hide} = FALSE
+      END      
+    END  
+  END
+
 ce_MetroWizardForm.SetHeaderIcon  PROCEDURE(STRING pText)
   CODE
   SELF.headerImageFeq{PROP:Text} = pText
