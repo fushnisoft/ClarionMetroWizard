@@ -9,10 +9,15 @@ _ABCLinkMode_ EQUATE(1)
       Include('Equates.CLW'),ONCE
       Include('Keycodes.CLW'),ONCE
       Include('Errors.CLW'),ONCE
+Omit('!!!Docs!!!')
+
+Class Methods
+=============
+
+'!!!Docs!!!
       Map
       End ! map
   Include('ce_TabList.inc'),ONCE
-
 ce_TabList.Construct  PROCEDURE()
   CODE
   SELF.boxMargin = 4
@@ -29,6 +34,39 @@ ce_TabList.Destruct   PROCEDURE
   
 ce_TabList.Init     PROCEDURE  (WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE)
 savePixels                   BYTE
+Omit('!!!Docs!!!')
+
+.. _method-ce_tablist.init:
+
+---------------
+ce_TabList.Init
+---------------
+
+Before using any other methods you **must** call this Init method. 
+
+**Syntax**::
+
+  Init (WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE)
+
+.. describe:: Parameters:
+
+| *pWM*
+| Type: *WindowManager* 
+
+  The window manager to call AddItem on
+
+| *pSheetFeq*
+| Type: *SIGNED*
+
+  FEQ value of the Sheet control to be adjusted.
+
+| *pSkipChecksAndOptions=FALSE*
+| Type: *BYTE*
+
+  I think this one is actually not used anymore, probably best to ignore it for now...
+
+!!!Docs!!!
+
   CODE
   
   savePixels     = 0{PROP:Pixels}
@@ -182,6 +220,8 @@ rv BYTE
     
   END
 
+  SELF.TakeEvent()
+  
   RETURN rv
   
 ce_TabList.SetupNoSheet   PROCEDURE(BYTE pSkipChecksAndOptions=FALSE) 
@@ -270,4 +310,6 @@ lastLocate                   LONG
 ce_TabList.TakeAccepted   PROCEDURE() !,VIRTUAL
   CODE
 ce_TabList.TakeNewSelection   PROCEDURE() !,VIRTUAL
+  CODE
+ce_TabList.TakeEvent PROCEDURE() !,VIRTUAL
   CODE

@@ -9,6 +9,12 @@ _ABCLinkMode_ EQUATE(1)
       Include('Equates.CLW'),ONCE
       Include('Keycodes.CLW'),ONCE
       Include('Errors.CLW'),ONCE
+Omit('!!!Docs!!!')
+
+Class Methods
+=============
+
+!!!Docs!!!
       Map
       End ! map
       Include('ce_MetroWizardForm.inc'),ONCE
@@ -91,6 +97,70 @@ ce_MetroWizardForm.Construct  PROCEDURE
 
 ce_MetroWizardForm.Init   PROCEDURE (WindowManager pWM, SIGNED pSheetFeq)
 savePixels                  BYTE
+Omit('!!!Docs!!!')
+  
+.. _method-ce_metrowizardform-init:
+
+------------------------------
+ce_MetroWizardForm.Init
+------------------------------
+
+Before calling this method you **must** set the button and prompt properties:
+
+* ce_MetroWizardForm.buttonNext (optional)
+* ce_MetroWizardForm.buttonPrevious (optional)
+* ce_MetroWizardForm.buttonOK
+* ce_MetroWizardForm.buttonClose 
+
+* ce_MetroWizardForm.promptTabDetail 
+* ce_MetroWizardForm.promptTabHeader 
+
+Before using any other methods you **must** call this Init method. 
+
+**Syntax**::
+
+  Init (WindowManager pWM, SIGNED pSheetFeq)
+
+.. describe:: Parameters:
+
+| *pWM*
+| Type: *WindowManager* 
+
+  The window manager to call AddItem on
+
+| *pSheetFeq*
+| Type: *SIGNED*
+
+  FEQ value of the Sheet control to be adjusted.
+
+.. describe:: Example
+
+.. code-block:: guess
+  :linenos:
+
+  ThisWindow.Init PROCEDURE
+    CODE
+    ! ...
+    ! A bunch of other Init stuff happens here, then...
+    ! ...
+    SELF.Open(Window)
+    ?ButtonNext{PROP:Hide} = TRUE
+    ?ButtonPrevious{PROP:Hide} = TRUE
+  
+    MetroForm.buttonNext = ?ButtonNext
+    MetroForm.buttonPrevious = ?ButtonPrevious
+    MetroForm.buttonOK = ?ButtonOK
+    MetroForm.buttonClose = ?ButtonClose
+  
+    MetroForm.promptTabDetail = ?PromptTabDetail
+    MetroForm.promptTabHeader = ?PromptTabHeader
+  
+    MetroForm.Init(SELF, ?CurrentTab)
+    MetroForm.SetHeaderText('Clarion Metro Wizard Demo v1.3')
+
+    MetroForm.SetListHeaderText('Demo Features')
+
+!!!Docs!!!
   CODE
   
   ! Make sure the sheet is set to the width of the window
@@ -173,10 +243,10 @@ posG                                Group(PositionGroup)
   SELF.listFeq{PROP:YPos} = SELF.boxHeaderFeq{PROP:Height} + SELF.boxListTitleFeq{PROP:Height} - 1
   SELF.listFeq{PROP:Height} = SELF.boxFooterFeq{PROP:YPos} - SELF.listFeq{PROP:YPos} 
   IF SELF.listBorderC6Style = FALSE
-    SELF.listFeq{PROP:XPos} = SELF.listFeq{PROP:XPos} - 1
+    SELF.listFeq{PROP:XPos} = SELF.listFeq{PROP:XPos} + 1! - 1
   END
   
-  SELF.listFeq{PROP:Width} = SELF.listFeq{PROP:Width} + 1
+  SELF.listFeq{PROP:Width} = SELF.listFeq{PROP:Width} - 1! + 1
 
   SELF.promptListTitleFeq{PROP:XPos} = 8
   SELF.promptListTitleFeq{PROP:YPos} = SELF.boxListTitleFeq{PROP:YPos} + (SELF.boxListTitleFeq{PROP:Height}/3)
@@ -255,6 +325,7 @@ ce_MetroWizardForm.SetButtonStyle PROCEDURE(SIGNED pFeq, STRING pIcon) !,VIRTUAL
   
 
 ce_MetroWizardForm.CreateControls PROCEDURE()!,VIRTUAL
+windowBorder SIGNED
   CODE
 
   ! Create a bunch of controls used by the window
@@ -290,6 +361,18 @@ ce_MetroWizardForm.CreateControls PROCEDURE()!,VIRTUAL
   SETPOSITION(SELF.headerImageFeq, 6, 8, 24, 24)
   SELF.headerImageFeq{PROP:Text} = SELF.headerImage
   SELF.headerImageFeq{PROP:Hide} = FALSE
+  
+  SELF.headerRegionFEQ = Create(0, CREATE:region)
+  SetPosition(SELF.headerRegionFEQ, 0, 0, 0{PROP:Width}, SELF.headerHeight)
+  SELF.headerRegionFEQ{PROP:Hide} = FALSE
+  SELf.headerRegionFEQ{PROP:IMM} = TRUE
+
+  windowBorder = Create(0, CREATE:box)
+  SetPosition(windowBorder, 0, 0, 0{PROP:Width}, 0{PROP:Height})
+  windowBorder{PROP:Hide} = FALSE
+  !windowBorder{PROP:LineWidth} = 2
+  windowBorder{PROP:Color} = COLOR:Gray
+
   ! ==========================================
 
 ce_MetroWizardForm.SetTheme PROCEDURE(BYTE pThemeNumber)!,VIRTUAL
@@ -434,3 +517,28 @@ ce_MetroWizardForm.SetListHeaderText  PROCEDURE(STRING pText)
 ce_MetroWizardForm.SetFooterText  PROCEDURE(STRING pText)
   CODE
   SELF.promptFooterFeq{PROP:Text} = pText
+
+ce_MetroWizardForm.TakeEvent  PROCEDURE() !,VIRTUAL
+origX                           LONG
+origY                           LONG
+  CODE
+  CASE Field()
+  OF SELF.headerRegionFEQ
+    CASE EVENT()
+    OF Event:MouseDown
+      origX = MOUSEX()
+      origY = MOUSEY()
+      ACCEPT
+        CASE EVENT()
+        OF Event:MouseUp
+          BREAK
+        OF Event:MouseMove
+          SETPOSITION(0, | 
+            0{Prop:Xpos} + (MOUSEX() - origX), | 
+            0{Prop:Ypos} + (MOUSEY() - origY))
+        END
+      END
+    END
+  END
+  
+    

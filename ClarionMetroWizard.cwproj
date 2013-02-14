@@ -11,6 +11,7 @@
     <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
     <Model>Dll</Model>
     <ApplicationIcon>resources\AppIcon.ico</ApplicationIcon>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>True</DebugSymbols>
@@ -27,10 +28,6 @@
     <check_index>False</check_index>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ce_BaseWindowComponent.clw" />
-    <None Include="ce_MetroWizardForm.clw" />
-    <None Include="ce_MetroWizardForm.inc" />
-    <Compile Include="ce_TabList.clw" />
     <Compile Include="ClarionMetroWizard.clw">
       <Generated>true</Generated>
     </Compile>
@@ -43,8 +40,6 @@
     <Compile Include="ClarionMetroWizard_BC0.CLW">
       <Generated>true</Generated>
     </Compile>
-    <None Include="ce_BaseWindowComponent.inc" />
-    <None Include="ce_TabList.inc" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="1.ico" />
@@ -78,4 +73,7 @@
     <Library Include="resources\AppIcon.ico" />
   </ItemGroup>
   <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell _scripts\make_docs.ps1</PostBuildEvent>
+  </PropertyGroup>
 </Project>

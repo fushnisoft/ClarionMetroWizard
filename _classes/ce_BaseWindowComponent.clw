@@ -9,6 +9,12 @@ _ABCLinkMode_ EQUATE(1)
       Include('Equates.CLW'),ONCE
       Include('Keycodes.CLW'),ONCE
       Include('Errors.CLW'),ONCE
+Omit('!!!Docs!!!')
+
+Class Methods
+=============
+
+'!!!Docs!!!
       MAP
       END 
       Include('ce_BaseWindowComponent.inc'),ONCE

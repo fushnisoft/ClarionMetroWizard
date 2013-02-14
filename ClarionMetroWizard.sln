@@ -9,6 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ClarionMetroWizard.app = ClarionMetroWizard.app
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Classes", "_Classes", "{46D75DC5-2C8B-467A-A622-DE229E133E4B}"
+	ProjectSection(SolutionItems) = postProject
+		_classes\ce_BaseWindowComponent.clw = _classes\ce_BaseWindowComponent.clw
+		_classes\ce_BaseWindowComponent.inc = _classes\ce_BaseWindowComponent.inc
+		_classes\ce_MetroWizardForm.clw = _classes\ce_MetroWizardForm.clw
+		_classes\ce_MetroWizardForm.inc = _classes\ce_MetroWizardForm.inc
+		_classes\ce_TabList.clw = _classes\ce_TabList.clw
+		_classes\ce_TabList.inc = _classes\ce_TabList.inc
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Scripts", "_Scripts", "{946C4B54-9458-43E9-90DA-5C54D1726B4C}"
+	ProjectSection(SolutionItems) = postProject
+		_scripts\make_docs.ps1 = _scripts\make_docs.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
