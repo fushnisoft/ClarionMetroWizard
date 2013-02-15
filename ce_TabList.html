@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ce_TabList Class &mdash; Clarion Metro Form 1.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Clarion Metro Form 1.3 documentation" href="index.html" />
+    <link rel="prev" title="ce_MetroWizardForm Class" href="ce_MetroWizardForm.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ce_MetroWizardForm.html" title="ce_MetroWizardForm Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Clarion Metro Form 1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ce-tablist-class">
+<h1>ce_TabList Class<a class="headerlink" href="#ce-tablist-class" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="class-ce-tablist"></span><dl class="describe">
+<dt>
+<tt class="descname">ce_TabList Class(ce_BaseWindowComponent),Implements(WindowComponent)</tt></dt>
+<dd><p>This class will take a Sheet control and convert it into list box representation of the TABs on the left.
+It is designed with a fairly narrow target but as long as you stay within the guidelines it seems to work well :)</p>
+</dd></dl>
+
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Just add a new instance of this class to a window, follow the requirements below and call the init method and you should be good to go.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A Sheet control with TAB location set to LEFT</li>
+<li>The TAB width needs to be set manually rather than left at zero</li>
+<li>The class will <em>not</em> convert nested Sheets into a tree structure.</li>
+<li>There are probably a lot of hard coded values for position and size of elements.</li>
+</ul>
+</div>
+<div class="section" id="class-properties">
+<h2>Class Properties<a class="headerlink" href="#class-properties" title="Permalink to this headline">¶</a></h2>
+<p>This document will not list all the public properties, take a look at the source code for them for now.</p>
+</div>
+<div class="section" id="class-methods">
+<h2>Class Methods<a class="headerlink" href="#class-methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ce-tablist-init">
+<span id="method-ce-tablist-init"></span><h3>ce_TabList.Init<a class="headerlink" href="#ce-tablist-init" title="Permalink to this headline">¶</a></h3>
+<p>Before using any other methods you <strong>must</strong> call this Init method.</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>Init (WindowManager pWM, SIGNED pSheetFeq)</pre>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Parameters:</tt></dt>
+<dd></dd></dl>
+
+<div class="line-block">
+<div class="line"><em>pWM</em></div>
+<div class="line">Type: <em>WindowManager</em></div>
+</div>
+<blockquote>
+<div>The window manager to call AddItem on</div></blockquote>
+<div class="line-block">
+<div class="line"><em>pSheetFeq</em></div>
+<div class="line">Type: <em>SIGNED</em></div>
+</div>
+<blockquote>
+<div>FEQ value of the Sheet control to be adjusted.</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ce_TabList Class</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#class-properties">Class Properties</a></li>
+<li><a class="reference internal" href="#class-methods">Class Methods</a><ul>
+<li><a class="reference internal" href="#ce-tablist-init">ce_TabList.Init</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ce_MetroWizardForm.html"
+                        title="previous chapter">ce_MetroWizardForm Class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/ce_TabList.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ce_MetroWizardForm.html" title="ce_MetroWizardForm Class"
+             >previous</a> |</li>
+        <li><a href="index.html">Clarion Metro Form 1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Brahn Partridge.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

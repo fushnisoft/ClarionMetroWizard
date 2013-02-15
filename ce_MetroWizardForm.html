@@ -1,0 +1,472 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ce_MetroWizardForm Class &mdash; Clarion Metro Form 1.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Clarion Metro Form 1.3 documentation" href="index.html" />
+    <link rel="next" title="ce_TabList Class" href="ce_TabList.html" />
+    <link rel="prev" title="ce_BaseWindowComponent Class" href="ce_BaseWindowComponent.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ce_TabList.html" title="ce_TabList Class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ce_BaseWindowComponent.html" title="ce_BaseWindowComponent Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Clarion Metro Form 1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ce-metrowizardform-class">
+<h1>ce_MetroWizardForm Class<a class="headerlink" href="#ce-metrowizardform-class" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="class-ce-metrowizardform"></span><dl class="describe">
+<dt>
+<tt class="descname">ce_MetroWizardForm Class(ce_TabList)</tt></dt>
+<dd><p>This class will take a Sheet control and convert it into Metro or &#8220;Modern UI&#8221; styled window. The sheet/Tab functionality is replaced with a list box on the left using the <a class="reference internal" href="ce_TabList.html#class-ce-tablist"><em>ce_TabList</em></a> class.
+It is designed with a fairly narrow target but as long as you stay within the guidelines it seems to work well :)</p>
+</dd></dl>
+
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Just add a new instance of this class to a window, set a few properties, call the init method and you should be good to go.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Same as the <a class="reference internal" href="ce_TabList.html#class-ce-tablist"><em>ce_TabList</em></a> class</li>
+<li>Next and Previous buttons if you want wizard functionality but without them you can also apply this to a standard form with OK and Close/Cancel buttons only.</li>
+<li>Prompts to recieve Tab Header and Tab Details. The values for these prompts are taken from the current tabs PROP:Text and PROP:Tip.</li>
+<li>There are probably a lot of hard coded values for position and size of elements.</li>
+</ul>
+</div>
+<div class="section" id="class-properties">
+<h2>Class Properties<a class="headerlink" href="#class-properties" title="Permalink to this headline">¶</a></h2>
+<p>This document will not list all the public properties, take a look at the source code for them for now.</p>
+<div class="section" id="themecolors">
+<h3>themeColors<a class="headerlink" href="#themecolors" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>themeColors LONG,DIM(25,2)</pre>
+</div>
+<p>The dimension of this property are filled with <a class="reference external" href="http://jasongaylord.com/blog/windows-8-color-palette">Windows 8 Color Palette</a>.</p>
+<img alt="_images/windows8-colors.jpg" src="_images/windows8-colors.jpg" />
+</div>
+<div class="section" id="prompttabheader">
+<h3>promptTabHeader<a class="headerlink" href="#prompttabheader" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>promptTabHeader SIGNED</pre>
+</div>
+<p>Field equate for the control used to display the name of the selected TAB.
+The value comes from the TABs PROP:Text and is updated on EVENT:NewSelection.</p>
+</div>
+<div class="section" id="prompttabdetail">
+<h3>promptTabDetail<a class="headerlink" href="#prompttabdetail" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>promptTabDetail SIGNED</pre>
+</div>
+<p>Field equate for the control used to display the detail of the selected TAB.
+The value comes from the TABs PROP:Tip and is updated on EVENT:NewSelection.</p>
+</div>
+<div class="section" id="prompttabheaderupper">
+<h3>promptTabHeaderUpper<a class="headerlink" href="#prompttabheaderupper" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>promptTabHeaderUpper SIGNED(FALSE)</pre>
+</div>
+<p>Convert text to upper case before display.</p>
+</div>
+<div class="section" id="prompttabdetailupper">
+<h3>promptTabDetailUpper<a class="headerlink" href="#prompttabdetailupper" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>promptTabDetailUpper SIGNED(TRUE)</pre>
+</div>
+<p>Convert text to upper case before display.</p>
+</div>
+<div class="section" id="buttonclose">
+<h3>buttonClose<a class="headerlink" href="#buttonclose" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>buttonClose SIGNED</pre>
+</div>
+<p>Field equate for the control used to close the form.
+The button remains hidden until the last TAB in the Sheet is visible.</p>
+</div>
+<div class="section" id="buttonok">
+<h3>buttonOK<a class="headerlink" href="#buttonok" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>buttonOK SIGNED</pre>
+</div>
+<p>Field equate for the control used to Ok the form.
+The button remains hidden until the last TAB in the Sheet is visible.</p>
+</div>
+<div class="section" id="buttonprevious">
+<h3>buttonPrevious<a class="headerlink" href="#buttonprevious" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>buttonPrevious SIGNED</pre>
+</div>
+<p>Field equate for the control used to navigate to the previous TAB.
+The button is only visible if the current TAB is not the first TAB on the sheet.</p>
+</div>
+<div class="section" id="buttonnext">
+<h3>buttonNext<a class="headerlink" href="#buttonnext" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>buttonNext SIGNED</pre>
+</div>
+<p>Field equate for the control used to navigate to the next TAB.
+The button is only visible if the current TAB is not the last TAB on the sheet.</p>
+</div>
+</div>
+<div class="section" id="class-methods">
+<h2>Class Methods<a class="headerlink" href="#class-methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="init">
+<span id="method-ce-metrowizardform-init"></span><h3>Init<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h3>
+<p>Before calling this method you <strong>must</strong> set the button and prompt properties:</p>
+<ul class="simple">
+<li>ce_MetroWizardForm.buttonNext (optional)</li>
+<li>ce_MetroWizardForm.buttonPrevious (optional)</li>
+<li>ce_MetroWizardForm.buttonOK</li>
+<li>ce_MetroWizardForm.buttonClose</li>
+<li>ce_MetroWizardForm.promptTabDetail</li>
+<li>ce_MetroWizardForm.promptTabHeader</li>
+</ul>
+<p>Before using any other methods you <strong>must</strong> call this Init method.</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>Init (WindowManager pWM, SIGNED pSheetFeq)</pre>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Parameters:</tt></dt>
+<dd></dd></dl>
+
+<div class="line-block">
+<div class="line"><em>pWM</em></div>
+<div class="line">Type: <em>WindowManager</em></div>
+</div>
+<blockquote>
+<div>The window manager to call AddItem on</div></blockquote>
+<div class="line-block">
+<div class="line"><em>pSheetFeq</em></div>
+<div class="line">Type: <em>SIGNED</em></div>
+</div>
+<blockquote>
+<div>FEQ value of the Sheet control to be adjusted.</div></blockquote>
+<div class="line-block">
+<div class="line"><em>pHideCaption=FALSE</em></div>
+<div class="line">TYPE: <em>BYTE</em></div>
+</div>
+<blockquote>
+<div>Set this to TRUE and the init method will call SetWindowLong to hide the form caption.</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By doing this you will lose min/max functionality.</p>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Example</tt></dt>
+<dd></dd></dl>
+
+<div class="highlight-guess"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ThisWindow</span><span class="p">.</span><span class="n">Init</span> <span class="n">PROCEDURE</span>
+  <span class="n">CODE</span>
+  <span class="o">!</span> <span class="p">...</span>
+  <span class="o">!</span> <span class="n">A</span> <span class="n">bunch</span> <span class="n">of</span> <span class="n">other</span> <span class="n">Init</span> <span class="n">stuff</span> <span class="n">happens</span> <span class="n">here</span><span class="p">,</span> <span class="n">then</span><span class="p">...</span>
+  <span class="o">!</span> <span class="p">...</span>
+  <span class="n">SELF</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="n">Window</span><span class="p">)</span>
+  <span class="o">?</span><span class="n">ButtonNext</span><span class="p">{</span><span class="n">PROP</span><span class="o">:</span><span class="n">Hide</span><span class="p">}</span> <span class="o">=</span> <span class="n">TRUE</span>
+  <span class="o">?</span><span class="n">ButtonPrevious</span><span class="p">{</span><span class="n">PROP</span><span class="o">:</span><span class="n">Hide</span><span class="p">}</span> <span class="o">=</span> <span class="n">TRUE</span>
+
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">buttonNext</span> <span class="o">=</span> <span class="o">?</span><span class="n">ButtonNext</span>
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">buttonPrevious</span> <span class="o">=</span> <span class="o">?</span><span class="n">ButtonPrevious</span>
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">buttonOK</span> <span class="o">=</span> <span class="o">?</span><span class="n">ButtonOK</span>
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">buttonClose</span> <span class="o">=</span> <span class="o">?</span><span class="n">ButtonClose</span>
+
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">promptTabDetail</span> <span class="o">=</span> <span class="o">?</span><span class="n">PromptTabDetail</span>
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">promptTabHeader</span> <span class="o">=</span> <span class="o">?</span><span class="n">PromptTabHeader</span>
+
+  <span class="mi">0</span><span class="p">{</span><span class="n">PROP</span><span class="o">:</span><span class="n">Text</span><span class="p">}</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">Clarion</span> <span class="n">Metro</span> <span class="n">Wizard</span> <span class="n">Demo</span> <span class="n">v1</span><span class="mf">.3</span><span class="err">&#39;</span>
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">SELF</span><span class="p">,</span> <span class="o">?</span><span class="n">CurrentTab</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">)</span>
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">SetHeaderText</span><span class="p">(</span><span class="mi">0</span><span class="p">{</span><span class="n">PROP</span><span class="o">:</span><span class="n">Text</span><span class="p">})</span>
+
+  <span class="n">MetroForm</span><span class="p">.</span><span class="n">SetListHeaderText</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Demo</span> <span class="n">Features</span><span class="err">&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="settheme">
+<span id="method-ce-metrowizardform-settheme"></span><h3>SetTheme<a class="headerlink" href="#settheme" title="Permalink to this headline">¶</a></h3>
+<p>Set the theme to be used for the form highlights.</p>
+<img alt="_images/windows8-colors.jpg" src="_images/windows8-colors.jpg" />
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>SetTheme (BYTE pThemeNumber)</pre>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Parameters:</tt></dt>
+<dd></dd></dl>
+
+<div class="line-block">
+<div class="line"><em>pThemeNumber</em></div>
+<div class="line">Type: <em>BYTE</em></div>
+</div>
+<blockquote>
+<div>Index for the theme to be used. Valid values in 0-25 range.</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">pThemeNumber=0 is the hardecoded default value not shown in the image above. Colors copied from the original Silverlight Metro Style Wizard project.</p>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Example</tt></dt>
+<dd></dd></dl>
+
+<div class="highlight-guess"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">MetroForm</span><span class="p">.</span><span class="n">SetTheme</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="applycolors">
+<span id="method-ce-metrowizardform-applycolors"></span><h3>ApplyColors<a class="headerlink" href="#applycolors" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the built in <a class="reference internal" href="#method-ce-metrowizardform-settheme"><em>SetTheme</em></a> method you can call this method to manually specify the highlights.</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>ApplyColors (LONG pDarkColor, LONG pLightColor)</pre>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Parameters:</tt></dt>
+<dd></dd></dl>
+
+<div class="line-block">
+<div class="line"><em>pDarkColor</em></div>
+<div class="line">Type: <em>LONG</em></div>
+</div>
+<blockquote>
+<div>Clarion color value for the dark highlight.</div></blockquote>
+<div class="line-block">
+<div class="line"><em>pLightColor</em></div>
+<div class="line">Type: <em>LONG</em></div>
+</div>
+<blockquote>
+<div>Clarion color value for the light highlight.</div></blockquote>
+<dl class="describe">
+<dt>
+<tt class="descname">Example</tt></dt>
+<dd></dd></dl>
+
+<div class="highlight-guess"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">MetroForm</span><span class="p">.</span><span class="n">ApplyColors</span><span class="p">(</span><span class="n">COLOR</span><span class="o">:</span><span class="n">Black</span><span class="p">,</span> <span class="n">COLOR</span><span class="o">:</span><span class="n">Silver</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="setheadertext">
+<span id="method-ce-metrowizardform-setheadertext"></span><h3>SetHeaderText<a class="headerlink" href="#setheadertext" title="Permalink to this headline">¶</a></h3>
+<p>Helper method to set the header prompt text</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>SetHeaderText (STRING pText)</pre>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Parameters:</tt></dt>
+<dd></dd></dl>
+
+<div class="line-block">
+<div class="line"><em>pText</em></div>
+<div class="line">Type: <em>STRING</em></div>
+</div>
+<blockquote>
+<div>Text for the prompt.</div></blockquote>
+<dl class="describe">
+<dt>
+<tt class="descname">Example</tt></dt>
+<dd></dd></dl>
+
+<div class="highlight-guess"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">MetroForm</span><span class="p">.</span><span class="n">SetHeaderText</span><span class="p">(</span><span class="mi">0</span><span class="p">{</span><span class="n">PROP</span><span class="o">:</span><span class="n">Text</span><span class="p">})</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="setlistheadertext">
+<span id="method-ce-metrowizardform-setlistheadertext"></span><h3>SetListHeaderText<a class="headerlink" href="#setlistheadertext" title="Permalink to this headline">¶</a></h3>
+<p>Helper method to set the list prompt text</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>SetListHeaderText (STRING pText)</pre>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Parameters:</tt></dt>
+<dd></dd></dl>
+
+<div class="line-block">
+<div class="line"><em>pText</em></div>
+<div class="line">Type: <em>STRING</em></div>
+</div>
+<blockquote>
+<div>Text for the prompt.</div></blockquote>
+<dl class="describe">
+<dt>
+<tt class="descname">Example</tt></dt>
+<dd></dd></dl>
+
+<div class="highlight-guess"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">MetroForm</span><span class="p">.</span><span class="n">SetListHeaderText</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Demo</span> <span class="n">Features</span><span class="err">&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="setfootertext">
+<span id="method-ce-metrowizardform-setfootertext"></span><h3>SetFooterText<a class="headerlink" href="#setfootertext" title="Permalink to this headline">¶</a></h3>
+<p>Helper method to set the footer prompt text</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>SetFooterText (STRING pText)</pre>
+</div>
+<dl class="describe">
+<dt>
+<tt class="descname">Parameters:</tt></dt>
+<dd></dd></dl>
+
+<div class="line-block">
+<div class="line"><em>pText</em></div>
+<div class="line">Type: <em>STRING</em></div>
+</div>
+<blockquote>
+<div>Text for the prompt.</div></blockquote>
+<dl class="describe">
+<dt>
+<tt class="descname">Example</tt></dt>
+<dd></dd></dl>
+
+<div class="highlight-guess"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">MetroForm</span><span class="p">.</span><span class="n">SetFooterText</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Footer</span> <span class="n">Demo</span><span class="o">:</span> <span class="err">&#39;</span> <span class="o">&amp;</span> <span class="n">Format</span><span class="p">(</span><span class="n">Clock</span><span class="p">(),</span> <span class="err">@</span><span class="n">t8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span> <span class="o">&amp;</span> <span class="n">Format</span><span class="p">(</span><span class="n">Today</span><span class="p">(),</span> <span class="err">@</span><span class="n">d18</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ce_MetroWizardForm Class</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#class-properties">Class Properties</a><ul>
+<li><a class="reference internal" href="#themecolors">themeColors</a></li>
+<li><a class="reference internal" href="#prompttabheader">promptTabHeader</a></li>
+<li><a class="reference internal" href="#prompttabdetail">promptTabDetail</a></li>
+<li><a class="reference internal" href="#prompttabheaderupper">promptTabHeaderUpper</a></li>
+<li><a class="reference internal" href="#prompttabdetailupper">promptTabDetailUpper</a></li>
+<li><a class="reference internal" href="#buttonclose">buttonClose</a></li>
+<li><a class="reference internal" href="#buttonok">buttonOK</a></li>
+<li><a class="reference internal" href="#buttonprevious">buttonPrevious</a></li>
+<li><a class="reference internal" href="#buttonnext">buttonNext</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-methods">Class Methods</a><ul>
+<li><a class="reference internal" href="#init">Init</a></li>
+<li><a class="reference internal" href="#settheme">SetTheme</a></li>
+<li><a class="reference internal" href="#applycolors">ApplyColors</a></li>
+<li><a class="reference internal" href="#setheadertext">SetHeaderText</a></li>
+<li><a class="reference internal" href="#setlistheadertext">SetListHeaderText</a></li>
+<li><a class="reference internal" href="#setfootertext">SetFooterText</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ce_BaseWindowComponent.html"
+                        title="previous chapter">ce_BaseWindowComponent Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ce_TabList.html"
+                        title="next chapter">ce_TabList Class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/ce_MetroWizardForm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ce_TabList.html" title="ce_TabList Class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ce_BaseWindowComponent.html" title="ce_BaseWindowComponent Class"
+             >previous</a> |</li>
+        <li><a href="index.html">Clarion Metro Form 1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Brahn Partridge.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
