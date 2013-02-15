@@ -36,7 +36,7 @@ themeColors
 
   themeColors LONG,DIM(25,2)
 
-The dimension of this property are filled with `Windows 8 Color Palette <http://jasongaylord.com/blog/windows-8-color-palette>`_. 
+The dimension of this property are filled with `Windows 8 Color Palette <http://jasongaylord.com/blog/windows-8-color-palette>`_ values. 
 
 .. image:: images/windows8-colors.jpg
 
@@ -182,8 +182,6 @@ Before using any other methods you **must** call this Init method.
     ! A bunch of other Init stuff happens here, then...
     ! ...
     SELF.Open(Window)
-    ?ButtonNext{PROP:Hide} = TRUE
-    ?ButtonPrevious{PROP:Hide} = TRUE
   
     MetroForm.buttonNext = ?ButtonNext
     MetroForm.buttonPrevious = ?ButtonPrevious

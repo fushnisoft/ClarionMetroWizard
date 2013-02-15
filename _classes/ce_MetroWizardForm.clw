@@ -153,8 +153,6 @@ Before using any other methods you **must** call this Init method.
     ! A bunch of other Init stuff happens here, then...
     ! ...
     SELF.Open(Window)
-    ?ButtonNext{PROP:Hide} = TRUE
-    ?ButtonPrevious{PROP:Hide} = TRUE
   
     MetroForm.buttonNext = ?ButtonNext
     MetroForm.buttonPrevious = ?ButtonPrevious

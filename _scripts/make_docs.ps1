@@ -3,7 +3,7 @@ cls
 if ($args[0])
   {exit}
 
-Import-Module "C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\Pscx\pscx.psd1"
+Import-Module pscx
 
 function ProcessFile($pSourceFile, $pOutputFile) {
   Write-Host "Processing" $pSourceFile
