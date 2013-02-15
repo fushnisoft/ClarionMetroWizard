@@ -16,6 +16,7 @@ Inspiration comes directly from the `Silverlight Metro Style Wizard <https://git
 Other Links
 -----------
 
+* `Class Documentation! <https://github.com/fushnisoft/ClarionMetroWizard>`_
 * `Source Code on GitHub <https://github.com/fushnisoft/ClarionMetroWizard>`_
 * `Blog post on ClarionEdge <http://www.clarionedge.com/clarion/examples/clarion-metro-wizard.html>`_
 
