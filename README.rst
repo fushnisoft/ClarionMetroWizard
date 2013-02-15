@@ -32,7 +32,7 @@ Design time...
 
 Run time!
 
-.. iamge:: http://www.clarionedge.com/wp-content/uploads/image74.png
+.. image:: http://www.clarionedge.com/wp-content/uploads/image74.png
     :width: 797 px
     :height: 595 px
     :scale: 40 %
