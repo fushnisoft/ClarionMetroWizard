@@ -1,18 +1,5 @@
-.. Clarion Metro Form documentation master file, created by
-   sphinx-quickstart on Wed Feb 13 17:05:58 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to Clarion Metro Form's documentation!
+Welcome to the Clarion Metro Form Project!
 ==============================================
-
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-   :glob:
-
-   *
 
 .. Note:: More than just a wizard now this project will probably be renamed to "Clarion Modern UI" or similar eventually.
 
@@ -35,21 +22,22 @@ Other Links
 Screenshots
 -----------
 
-.. figure:: http://www.clarionedge.com/wp-content/uploads/image72.png
+Design time...
+
+.. image:: http://www.clarionedge.com/wp-content/uploads/image72.png
     :width: 797 px
     :height: 595 px
     :scale: 40 %
     :target: http://www.clarionedge.com/wp-content/uploads/image72.png
 
-    Design time...
+Run time!
 
-
-.. figure:: http://www.clarionedge.com/wp-content/uploads/image74.png
+.. iamge:: http://www.clarionedge.com/wp-content/uploads/image74.png
     :width: 797 px
     :height: 595 px
     :scale: 40 %
     :target: http://www.clarionedge.com/wp-content/uploads/image74.png
 
-    Run time!
+    
 
 

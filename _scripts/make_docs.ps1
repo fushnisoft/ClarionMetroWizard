@@ -1,5 +1,8 @@
 ﻿#cd ..\_classes
 cls
+if ($args[0])
+  {exit}
+
 Import-Module "C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\Pscx\pscx.psd1"
 
 function ProcessFile($pSourceFile, $pOutputFile) {

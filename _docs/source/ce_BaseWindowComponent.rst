@@ -12,3 +12,5 @@ ce_BaseWindowComponent Class
 Class Methods
 =============
 
+This class implements stub procedures for all methods in the WindowComponent interface.
+

@@ -14,6 +14,8 @@ Omit('!!!Docs!!!')
 Class Methods
 =============
 
+This class implements stub procedures for all methods in the WindowComponent interface.
+
 '!!!Docs!!!
       MAP
       END 

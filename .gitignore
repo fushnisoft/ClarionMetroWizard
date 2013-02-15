@@ -6,6 +6,7 @@ Cla*.dll
 *.bpp
 *.ini
 *.ap~
+DL32.log
 
 #################
 ## Eclipse

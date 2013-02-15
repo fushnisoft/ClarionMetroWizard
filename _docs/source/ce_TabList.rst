@@ -43,7 +43,7 @@ Before using any other methods you **must** call this Init method.
 
 **Syntax**::
 
-  Init (WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE)
+  Init (WindowManager pWM, SIGNED pSheetFeq)
 
 .. describe:: Parameters:
 
@@ -56,9 +56,4 @@ Before using any other methods you **must** call this Init method.
 | Type: *SIGNED*
 
   FEQ value of the Sheet control to be adjusted.
-
-| *pSkipChecksAndOptions=FALSE*
-| Type: *BYTE*
-
-  I think this one is actually not used anymore, probably best to ignore it for now...
 

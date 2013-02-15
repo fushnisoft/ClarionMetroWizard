@@ -61,9 +61,121 @@ themeColors
 
   themeColors LONG,DIM(25,2)
 
-The dimension of this property are filled with `Windows 8 Color Palette <http://jasongaylord.com/blog/windows-8-color-palette>`_. 
+The dimension of this property are filled with `Windows 8 Color Palette <http://jasongaylord.com/blog/windows-8-color-palette>`_ values. 
+
+.. image:: images/windows8-colors.jpg
 
 !!!Docs!!!
+themeColors LONG,DIM(25,2)
+
+Omit('!!!Docs!!!')
+---------------------------
+promptTabHeader
+---------------------------
+
+**Syntax**::
+
+  promptTabHeader SIGNED
+
+Field equate for the control used to display the name of the selected TAB. 
+The value comes from the TABs PROP:Text and is updated on EVENT:NewSelection.
+
+---------------------------
+promptTabDetail
+---------------------------
+
+**Syntax**::
+
+  promptTabDetail SIGNED
+
+Field equate for the control used to display the detail of the selected TAB. 
+The value comes from the TABs PROP:Tip and is updated on EVENT:NewSelection.
+
+!!!Docs!!!
+
+promptTabHeader               SIGNED
+promptTabDetail               SIGNED
+
+Omit('!!!Docs!!!')
+---------------------------
+promptTabHeaderUpper
+---------------------------
+
+**Syntax**::
+
+  promptTabHeaderUpper SIGNED(FALSE)
+
+Convert text to upper case before display.
+
+---------------------------
+promptTabDetailUpper
+---------------------------
+
+**Syntax**::
+
+  promptTabDetailUpper SIGNED(TRUE)
+
+Convert text to upper case before display.
+
+!!!Docs!!!
+
+promptTabHeaderUpper          BYTE
+promptTabDetailUpper          BYTE
+
+Omit('!!!Docs!!!')
+---------------------------
+buttonClose
+---------------------------
+
+**Syntax**::
+
+  buttonClose SIGNED
+
+Field equate for the control used to close the form.
+The button remains hidden until the last TAB in the Sheet is visible.
+
+---------------------------
+buttonOK
+---------------------------
+
+**Syntax**::
+
+  buttonOK SIGNED
+
+Field equate for the control used to Ok the form.
+The button remains hidden until the last TAB in the Sheet is visible.
+
+---------------------------
+buttonPrevious
+---------------------------
+
+**Syntax**::
+
+  buttonPrevious SIGNED
+
+Field equate for the control used to navigate to the previous TAB.
+The button is only visible if the current TAB is not the first TAB on the sheet.
+
+---------------------------
+buttonNext
+---------------------------
+
+**Syntax**::
+
+  buttonNext SIGNED
+
+Field equate for the control used to navigate to the next TAB.
+The button is only visible if the current TAB is not the last TAB on the sheet.
+!!!Docs!!!
+
+buttonClose                   SIGNED
+buttonOK                      SIGNED
+buttonNext                    SIGNED
+buttonPrevious                SIGNED
+
+! --------------------------------------
+! Non public or not documented properties
+! --------------------------------------
 lightColor                    LONG
 darkColor                     LONG
 fontColor                     LONG
@@ -90,24 +202,15 @@ boxListTitleFeq               SIGNED
 promptListTitleFeq            SIGNED
 promptHeaderFeq               SIGNED
 promptFooterFeq               SIGNED
-promptTabHeader               SIGNED
-promptTabDetail               SIGNED
 
-promptTabHeaderUpper          BYTE
-promptTabDetailUpper          BYTE
-
-buttonClose                   SIGNED
 buttonCloseIcon               CSTRING(255)
-buttonOK                      SIGNED
 buttonOKIcon                  CSTRING(255)
-buttonNext                    SIGNED
 buttonNextIcon                CSTRING(255)
-buttonPrevious                SIGNED
 buttonPreviousIcon            CSTRING(255)
 headerRegionFEQ SIGNED
-themeColors LONG,DIM(25,2)
+
 ! Methods
-Init                          PROCEDURE(WindowManager pWM, SIGNED pSheetFeq) ,VIRTUAL 
+Init                          PROCEDURE(WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE) ,DERIVED 
 MoveOriginalControls          PROCEDURE(),VIRTUAL
 CreateControls                PROCEDURE(),VIRTUAL
 SetupWindow                   PROCEDURE(),VIRTUAL

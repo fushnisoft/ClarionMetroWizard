@@ -9,6 +9,7 @@ _ABCLinkMode_ EQUATE(1)
       Include('Equates.CLW'),ONCE
       Include('Keycodes.CLW'),ONCE
       Include('Errors.CLW'),ONCE
+      Include('svapi.inc') ,ONCE
 Omit('!!!Docs!!!')
 
 Class Methods
@@ -16,7 +17,8 @@ Class Methods
 
 !!!Docs!!!
       Map
-      End ! map
+        Include('svapifnc.inc') ,ONCE
+      End 
       Include('ce_MetroWizardForm.inc'),ONCE
 
 ce_MetroWizardForm.Construct  PROCEDURE   
@@ -95,14 +97,14 @@ ce_MetroWizardForm.Construct  PROCEDURE
   SELF.themeColors[25, CMW_COLOR_DARK] = 0686868h
   SELF.themeColors[25, CMW_COLOR_LIGHT] = 0237dffh
 
-ce_MetroWizardForm.Init   PROCEDURE (WindowManager pWM, SIGNED pSheetFeq)
+ce_MetroWizardForm.Init   PROCEDURE (WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE)
 savePixels                  BYTE
 Omit('!!!Docs!!!')
   
 .. _method-ce_metrowizardform-init:
 
 ------------------------------
-ce_MetroWizardForm.Init
+Init
 ------------------------------
 
 Before calling this method you **must** set the button and prompt properties:
@@ -133,6 +135,13 @@ Before using any other methods you **must** call this Init method.
 
   FEQ value of the Sheet control to be adjusted.
 
+| *pHideCaption=FALSE*
+| TYPE: *BYTE*
+
+  Set this to TRUE and the init method will call SetWindowLong to hide the form caption.
+
+.. Note:: By doing this you will lose min/max functionality.
+
 .. describe:: Example
 
 .. code-block:: guess
@@ -154,13 +163,15 @@ Before using any other methods you **must** call this Init method.
   
     MetroForm.promptTabDetail = ?PromptTabDetail
     MetroForm.promptTabHeader = ?PromptTabHeader
-  
-    MetroForm.Init(SELF, ?CurrentTab)
-    MetroForm.SetHeaderText('Clarion Metro Wizard Demo v1.3')
+    
+    0{PROP:Text} = 'Clarion Metro Wizard Demo v1.3'
+    MetroForm.Init(SELF, ?CurrentTab, TRUE)
+    MetroForm.SetHeaderText(0{PROP:Text})
 
     MetroForm.SetListHeaderText('Demo Features')
 
 !!!Docs!!!
+windowStyle LONG
   CODE
   
   ! Make sure the sheet is set to the width of the window
@@ -168,7 +179,7 @@ Before using any other methods you **must** call this Init method.
   pSheetFeq{PROP:Width} = 0{PROP:Width}
   
   ! Init the parent TabList class
-  SELF.Init(pWm, pSheetFeq, TRUE)
+  PARENT.Init(pWm, pSheetFeq, pHideCaption)
   
   savePixels = 0{PROP:Pixels}
   0{PROP:Pixels} = TRUE
@@ -177,6 +188,15 @@ Before using any other methods you **must** call this Init method.
   SELF.SetupWindow()
   SELF.SetupButtons()
   SELF.ApplyColors(SELF.darkColor, SELF.lightColor)
+
+  IF pHideCaption = TRUE
+    windowStyle = GetWindowLong(0{PROP:Handle}, GWL_STYLE)
+    windowStyle = BXOR(windowStyle, WS_CAPTION)
+    windowStyle = BXOR(windowStyle, WS_THICKFRAME)
+    IF SetWindowLong(0{PROP:Handle}, GWL_STYLE, windowStyle) = 0
+      Stop('GWL_STYLE Error: ' & GetLastError())
+    END
+  END
 
   0{PROP:Pixels} = savePixels
 
@@ -376,6 +396,39 @@ windowBorder SIGNED
   ! ==========================================
 
 ce_MetroWizardForm.SetTheme PROCEDURE(BYTE pThemeNumber)!,VIRTUAL
+Omit('!!!Docs!!!')
+  
+.. _method-ce_metrowizardform-settheme:
+
+------------------------------
+SetTheme
+------------------------------
+
+Set the theme to be used for the form highlights.
+
+.. image:: images/windows8-colors.jpg
+
+**Syntax**::
+
+  SetTheme (BYTE pThemeNumber)
+
+.. describe:: Parameters:
+
+| *pThemeNumber*
+| Type: *BYTE* 
+
+  Index for the theme to be used. Valid values in 0-25 range.
+
+.. Note:: pThemeNumber=0 is the hardecoded default value not shown in the image above. Colors copied from the original Silverlight Metro Style Wizard project.
+
+.. describe:: Example
+
+.. code-block:: guess
+  :linenos:
+
+  MetroForm.SetTheme(1)
+
+!!!Docs!!!
   CODE
   IF pThemeNumber > 0 AND pThemeNumber < 26
     SELF.ApplyColors(SELF.themeColors[pThemeNumber, CMW_COLOR_DARK], SELF.themeColors[pThemeNumber, CMW_COLOR_LIGHT])
@@ -388,6 +441,40 @@ ce_MetroWizardForm.SetTheme PROCEDURE(BYTE pThemeNumber)!,VIRTUAL
 ce_MetroWizardForm.ApplyColors                   PROCEDURE(LONG pDarkColor, LONG pLightColor)!,VIRTUAL
 buttonFeq                           SIGNED
 i                                   LONG
+Omit('!!!Docs!!!')
+  
+.. _method-ce_metrowizardform-applycolors:
+
+------------------------------
+ApplyColors
+------------------------------
+
+In addition to the built in :ref:`SetTheme <method-ce_metrowizardform-settheme>` method you can call this method to manually specify the highlights.
+
+**Syntax**::
+
+  ApplyColors (LONG pDarkColor, LONG pLightColor)
+
+.. describe:: Parameters:
+
+| *pDarkColor*
+| Type: *LONG* 
+
+  Clarion color value for the dark highlight.
+
+| *pLightColor*
+| Type: *LONG* 
+
+  Clarion color value for the light highlight.
+
+.. describe:: Example
+
+.. code-block:: guess
+  :linenos:
+
+  MetroForm.ApplyColors(COLOR:Black, COLOR:Silver)
+
+!!!Docs!!!
   CODE
   
   SELF.lightColor = pLightColor
@@ -507,14 +594,101 @@ ce_MetroWizardForm.SetHeaderIcon  PROCEDURE(STRING pText)
   SELF.headerImageFeq{PROP:Text} = pText
   
 ce_MetroWizardForm.SetHeaderText  PROCEDURE(STRING pText)
+Omit('!!!Docs!!!')
+  
+.. _method-ce_metrowizardform-setheadertext:
+
+--------------------------------
+SetHeaderText
+--------------------------------
+
+Helper method to set the header prompt text
+
+**Syntax**::
+
+  SetHeaderText (STRING pText)
+
+.. describe:: Parameters:
+
+| *pText*
+| Type: *STRING* 
+
+  Text for the prompt.
+
+.. describe:: Example
+
+.. code-block:: guess
+  :linenos:
+
+  MetroForm.SetHeaderText(0{PROP:Text})
+
+!!!Docs!!!
   CODE
   SELF.promptHeaderFeq{PROP:Text} = pText
   
 ce_MetroWizardForm.SetListHeaderText  PROCEDURE(STRING pText)
+Omit('!!!Docs!!!')
+  
+.. _method-ce_metrowizardform-setlistheadertext:
+
+--------------------------------
+SetListHeaderText
+--------------------------------
+
+Helper method to set the list prompt text
+
+**Syntax**::
+
+  SetListHeaderText (STRING pText)
+
+.. describe:: Parameters:
+
+| *pText*
+| Type: *STRING* 
+
+  Text for the prompt.
+
+.. describe:: Example
+
+.. code-block:: guess
+  :linenos:
+
+  MetroForm.SetListHeaderText('Demo Features')
+
+!!!Docs!!!
   CODE
   SELF.promptListTitleFeq{PROP:Text} = pText
   
 ce_MetroWizardForm.SetFooterText  PROCEDURE(STRING pText)
+Omit('!!!Docs!!!')
+  
+.. _method-ce_metrowizardform-setfootertext:
+
+--------------------------------
+SetFooterText
+--------------------------------
+
+Helper method to set the footer prompt text
+
+**Syntax**::
+
+  SetFooterText (STRING pText)
+
+.. describe:: Parameters:
+
+| *pText*
+| Type: *STRING* 
+
+  Text for the prompt.
+
+.. describe:: Example
+
+.. code-block:: guess
+  :linenos:
+
+  MetroForm.SetFooterText('Footer Demo: ' & Format(Clock(), @t8) & ', ' & Format(Today(), @d18))
+
+!!!Docs!!!
   CODE
   SELF.promptFooterFeq{PROP:Text} = pText
 

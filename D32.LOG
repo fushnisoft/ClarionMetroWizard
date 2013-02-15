@@ -1,0 +1,76 @@
+Started 
+Heap handle: 01340000
+start process C:\Dev\Projects\ClarionMetroWizard\ClarionMetroWizard.Exe
+Command line :> "C:\Dev\Clarion\C8\bin\Cladb.exe" -s Release "C:\Dev\Projects\ClarionMetroWizard\ClarionMetroWizard.Exe" 
+Command line :> "C:\Dev\Projects\ClarionMetroWizard\ClarionMetroWizard.Exe" 
+Redirection file :> 
+CREATE_PROCESS_DEBUG_EVENT  ! No image name found
+g.debug_name C:\Dev\Projects\ClarionMetroWizard\ClarionMetroWizard.Exe
+BaseOfImage                00400000
+CREATE_PROCESS_DEBUG_EVENT: process main thread tid=00002D6C
+thread handle=00000248
+ntdll.dll Loaded at: 77830000
+No debug information
+UNLOAD_DLL_DEBUG_EVENT: BaseOfDll 004C0000
+UNLOAD_DLL_DEBUG_EVENT: BaseOfDll 75440000
+UNLOAD_DLL_DEBUG_EVENT: BaseOfDll 004C0000
+UNLOAD_DLL_DEBUG_EVENT: BaseOfDll 004C0000
+KERNEL32.dll Loaded at: 75440000
+No debug information
+KERNELBASE.dll Loaded at: 74F90000
+No debug information
+apphelp.dll Loaded at: 72CB0000
+No debug information
+SHIMVIEW: ShimInfo(Complete)
+ClaASC.dll Loaded at: 007E0000
+No debug information
+ClaRUN.dll Loaded at: 01000000
+WslDb$$NotifyDebugger 010D0E64
+USER32.dll Loaded at: 77230000
+No debug information
+COMDLG32.dll Loaded at: 75040000
+No debug information
+ADVAPI32.dll Loaded at: 77350000
+No debug information
+COMCTL32.dll Loaded at: 74C40000
+No debug information
+GDI32.dll Loaded at: 76FC0000
+No debug information
+MPR.dll Loaded at: 72330000
+No debug information
+ole32.dll Loaded at: 75130000
+No debug information
+OLEAUT32.dll Loaded at: 76DF0000
+No debug information
+oledlg.dll Loaded at: 6F370000
+No debug information
+SHELL32.dll Loaded at: 756A0000
+No debug information
+WINSPOOL.DRV Loaded at: 722D0000
+No debug information
+msvcrt.dll Loaded at: 755E0000
+No debug information
+SHLWAPI.dll Loaded at: 77560000
+No debug information
+SECHOST.dll Loaded at: 75400000
+No debug information
+RPCRT4.dll Loaded at: 74EE0000
+No debug information
+combase.dll Loaded at: 775A0000
+No debug information
+SspiCli.dll Loaded at: 74EC0000
+No debug information
+SHCORE.dll Loaded at: 74080000
+No debug information
+CRYPTBASE.dll Loaded at: 74EB0000
+No debug information
+bcryptPrimitives.dll Loaded at: 74E50000
+No debug information
+IMM32.dll Loaded at: 77400000
+No debug information
+MSCTF.dll Loaded at: 77470000
+No debug information
+appinit_dll.dll Loaded at: 6EFC0000
+No debug information
+CREATE_THREAD_DEBUG_EVENT: tid=0000332C
+thread handle=000002E8

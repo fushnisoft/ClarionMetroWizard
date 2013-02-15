@@ -63,9 +63,9 @@ lastChoice            LONG
 ! Methods
 Construct             PROCEDURE()
 Destruct              PROCEDURE() ,VIRTUAL 
-Init                  PROCEDURE(WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE) ,VIRTUAL 
+Init                  PROCEDURE(WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE) ,VIRTUAL 
 SetListFrom           PROCEDURE() ,VIRTUAL 
-SetupNoSheet          PROCEDURE(BYTE pSkipChecksAndOptions=FALSE) ,VIRTUAL 
+SetupNoSheet          PROCEDURE() ,VIRTUAL 
 TakeAccepted          PROCEDURE() ,VIRTUAL
 TakeNewSelection      PROCEDURE() ,VIRTUAL
 TakeEvent             PROCEDURE() ,VIRTUAL
