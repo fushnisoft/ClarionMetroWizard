@@ -80,7 +80,7 @@ It is designed with a fairly narrow target but as long as you stay within the gu
 <p><strong>Syntax</strong>:</p>
 <div class="highlight-python"><pre>themeColors LONG,DIM(25,2)</pre>
 </div>
-<p>The dimension of this property are filled with <a class="reference external" href="http://jasongaylord.com/blog/windows-8-color-palette">Windows 8 Color Palette</a>.</p>
+<p>The dimension of this property are filled with <a class="reference external" href="http://jasongaylord.com/blog/windows-8-color-palette">Windows 8 Color Palette</a> values.</p>
 <img alt="_images/windows8-colors.jpg" src="_images/windows8-colors.jpg" />
 </div>
 <div class="section" id="prompttabheader">
@@ -214,16 +214,12 @@ The button is only visible if the current TAB is not the last TAB on the sheet.<
 17
 18
 19
-20
-21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ThisWindow</span><span class="p">.</span><span class="n">Init</span> <span class="n">PROCEDURE</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ThisWindow</span><span class="p">.</span><span class="n">Init</span> <span class="n">PROCEDURE</span>
   <span class="n">CODE</span>
   <span class="o">!</span> <span class="p">...</span>
   <span class="o">!</span> <span class="n">A</span> <span class="n">bunch</span> <span class="n">of</span> <span class="n">other</span> <span class="n">Init</span> <span class="n">stuff</span> <span class="n">happens</span> <span class="n">here</span><span class="p">,</span> <span class="n">then</span><span class="p">...</span>
   <span class="o">!</span> <span class="p">...</span>
   <span class="n">SELF</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="n">Window</span><span class="p">)</span>
-  <span class="o">?</span><span class="n">ButtonNext</span><span class="p">{</span><span class="n">PROP</span><span class="o">:</span><span class="n">Hide</span><span class="p">}</span> <span class="o">=</span> <span class="n">TRUE</span>
-  <span class="o">?</span><span class="n">ButtonPrevious</span><span class="p">{</span><span class="n">PROP</span><span class="o">:</span><span class="n">Hide</span><span class="p">}</span> <span class="o">=</span> <span class="n">TRUE</span>
 
   <span class="n">MetroForm</span><span class="p">.</span><span class="n">buttonNext</span> <span class="o">=</span> <span class="o">?</span><span class="n">ButtonNext</span>
   <span class="n">MetroForm</span><span class="p">.</span><span class="n">buttonPrevious</span> <span class="o">=</span> <span class="o">?</span><span class="n">ButtonPrevious</span>
