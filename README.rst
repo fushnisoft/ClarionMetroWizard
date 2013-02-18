@@ -3,6 +3,8 @@ Welcome to the Clarion Metro Form Project!
 
 .. Note:: More than just a wizard now this project will probably be renamed to "Clarion Modern UI" or similar eventually.
 
+.. Note:: The APP file included was created with Clarion8. 
+
 About
 -----
 
