@@ -121,7 +121,7 @@ Before using any other methods you **must** call this Init method.
 
 **Syntax**::
 
-  Init (WindowManager pWM, SIGNED pSheetFeq)
+  Init (WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE)
 
 .. describe:: Parameters:
 
@@ -195,6 +195,9 @@ windowStyle LONG
       Stop('GWL_STYLE Error: ' & GetLastError())
     END
   END
+  ! Make the window match the size of the sheet and border box.
+  0{PROP:Width} = SELf.sheetFeq{PROP:Xpos} + SELF.sheetFeq{PROP:Width} + 2
+  0{PROP:Height} = SELF.boxFooterFeq{PROP:Ypos} + SELF.boxFooterFeq{PROP:Height} + 1
 
   0{PROP:Pixels} = savePixels
 
