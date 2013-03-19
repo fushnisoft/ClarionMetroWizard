@@ -150,7 +150,7 @@ Before using any other methods you **must** call this Init method.
 
 **Syntax**::
 
-  Init (WindowManager pWM, SIGNED pSheetFeq)
+  Init (WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE)
 
 .. describe:: Parameters:
 
