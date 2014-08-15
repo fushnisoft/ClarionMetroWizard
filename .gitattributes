@@ -4,6 +4,7 @@
 # Custom for clarion
 *.inc text eol=crlf
 *.clw text eol=crlf
+*.red text eol=crlf
 
 # Custom for Visual Studio
 *.cs     diff=csharp
