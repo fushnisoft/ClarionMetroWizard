@@ -6,6 +6,9 @@
 *.clw text eol=crlf
 *.red text eol=crlf
 
+# Force Linguist support for Clarion inc files
+*.inc linguist-language=Clarion
+
 # Custom for Visual Studio
 *.cs     diff=csharp
 *.sln    merge=union
