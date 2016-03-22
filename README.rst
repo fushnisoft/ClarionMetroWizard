@@ -5,6 +5,8 @@ Welcome to the Clarion Metro Form Project!
 
 .. Note:: The APP file included was created with Clarion8. 
 
+See also https://ClarionHub.com for discussions, support and examples!
+
 About
 -----
 
