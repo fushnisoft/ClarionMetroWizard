@@ -97,7 +97,7 @@ ce_MetroWizardForm.Construct  PROCEDURE
   SELF.themeColors[25, CMW_COLOR_DARK] = 0686868h
   SELF.themeColors[25, CMW_COLOR_LIGHT] = 0237dffh
 
-ce_MetroWizardForm.Init   PROCEDURE (WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE)
+ce_MetroWizardForm.Init   PROCEDURE (WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE, BYTE pHideCaption=FALSE)
 savePixels                  BYTE
 Omit('!!!Docs!!!')
   
@@ -121,7 +121,7 @@ Before using any other methods you **must** call this Init method.
 
 **Syntax**::
 
-  Init (WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE)
+  Init (WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE, BYTE pHideCaption=FALSE)
 
 .. describe:: Parameters:
 
@@ -134,6 +134,11 @@ Before using any other methods you **must** call this Init method.
 | Type: *SIGNED*
 
   FEQ value of the Sheet control to be adjusted.
+
+| *pSkipChecksAndOptions=FALSE*
+| TYPE: *BYTE*
+
+  Set this to TRUE and when the parent TabList class sets up the controls on the wizard it will skip setting the backround of check and option controls.
 
 | *pHideCaption=FALSE*
 | TYPE: *BYTE*
@@ -177,7 +182,7 @@ windowStyle LONG
   pSheetFeq{PROP:Width} = 0{PROP:Width}
   
   ! Init the parent TabList class
-  PARENT.Init(pWm, pSheetFeq, pHideCaption)
+  PARENT.Init(pWm, pSheetFeq, pSkipChecksAndOptions, pHideCaption)
   
   savePixels = 0{PROP:Pixels}
   0{PROP:Pixels} = TRUE
@@ -264,10 +269,10 @@ posG                                Group(PositionGroup)
   SELF.listFeq{PROP:YPos} = SELF.boxHeaderFeq{PROP:Height} + SELF.boxListTitleFeq{PROP:Height} - 1
   SELF.listFeq{PROP:Height} = SELF.boxFooterFeq{PROP:YPos} - SELF.listFeq{PROP:YPos} 
   IF SELF.listBorderC6Style = FALSE
-    SELF.listFeq{PROP:XPos} = SELF.listFeq{PROP:XPos} + 1! - 1
+    SELF.listFeq{PROP:XPos} = SELF.listFeq{PROP:XPos} - 1
   END
   
-  SELF.listFeq{PROP:Width} = SELF.listFeq{PROP:Width} - 1! + 1
+  SELF.listFeq{PROP:Width} = SELF.listFeq{PROP:Width} + 1
 
   SELF.promptListTitleFeq{PROP:XPos} = 8
   SELF.promptListTitleFeq{PROP:YPos} = SELF.boxListTitleFeq{PROP:YPos} + (SELF.boxListTitleFeq{PROP:Height}/3)

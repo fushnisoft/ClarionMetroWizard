@@ -32,7 +32,7 @@ ce_TabList.Destruct   PROCEDURE
     DISPOSE(SELF.tabQ)
   END
   
-ce_TabList.Init     PROCEDURE  (WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE)
+ce_TabList.Init     PROCEDURE  (WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE, BYTE pHideCaption=FALSE)
 savePixels                   BYTE
 Omit('!!!Docs!!!')
 
@@ -77,7 +77,7 @@ Before using any other methods you **must** call this Init method.
   pWM.AddItem(SELF.WindowComponent)
 
   SELF.boxFeq = Create(0, CREATE:box)
-  SELF.backgroundImageFeq = Create(0, CREATE:image)
+  SELF.backgroundImageFeq = Create(0, CREATE:image, 0)
   SELF.backgroundImageFeq{PROP:Text} = SELF.backgroundImage
   SELF.listFeq = Create(0, CREATE:list)
 
@@ -116,7 +116,7 @@ Before using any other methods you **must** call this Init method.
   SELF.listFeq{PROPSTYLE:TextSelected, 2} = COLOR:Black
   SELF.listFeq{PROPSTYLE:BackSelected, 2} = 03F9FFEh
 
-  SELF.SetupNoSheet()
+  SELF.SetupNoSheet(pSkipChecksAndOptions)
 
   0{PROP:Alrt,255} = CtrlTab
   0{PROP:Alrt,255} = CtrlShiftTab
@@ -219,7 +219,7 @@ rv BYTE
   
   RETURN rv
   
-ce_TabList.SetupNoSheet   PROCEDURE() 
+ce_TabList.SetupNoSheet   PROCEDURE(BYTE pSkipChecksAndOptions=FALSE) 
 thisFeq                     SIGNED
 tempFeq                     SIGNED
 originalDisplayState        BYTE
@@ -263,6 +263,16 @@ originalDisplayState        BYTE
       CREATE:string) > 0 AND |
       (thisFeq{PROP:Background} = -1 OR thisFeq{PROP:Background} = 0)
 
+      IF pSkipChecksAndOptions=TRUE AND |
+        InList(thisFeq{PROP:Type}, |
+          CREATE:option, |
+          CREATE:check, |
+          CREATE:radio) > 0
+
+        ! Skip these ones though. PROP:Trn is ugly with SkinFramework applied!
+        CYCLE
+      END
+      
       thisFeq{PROP:Trn} = TRUE
     END
   END

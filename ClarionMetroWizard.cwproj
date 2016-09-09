@@ -19,6 +19,8 @@
     <vid>full</vid>
     <check_stack>True</check_stack>
     <check_index>True</check_index>
+    <StartAction>Project</StartAction>
+    <StartArguments>/TESTDebuger</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>False</DebugSymbols>
@@ -26,6 +28,8 @@
     <vid>off</vid>
     <check_stack>False</check_stack>
     <check_index>False</check_index>
+    <StartAction>Project</StartAction>
+    <StartArguments>/TESTRelease</StartArguments>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClarionMetroWizard.clw">
@@ -73,7 +77,4 @@
     <Library Include="resources\AppIcon.ico" />
   </ItemGroup>
   <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>powershell _scripts\make_docs.ps1</PostBuildEvent>
-  </PropertyGroup>
 </Project>

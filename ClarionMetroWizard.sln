@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 # Clarion 2.1.0.2447
 Project("{12B76EC0-1D7B-4FA7-A7D0-C524288B48A1}") = "ClarionMetroWizard", "ClarionMetroWizard.cwproj", "{9466F199-8928-471F-B6FB-70D295CE52BF}"
 EndProject

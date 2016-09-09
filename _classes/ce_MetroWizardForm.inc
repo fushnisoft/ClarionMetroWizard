@@ -210,7 +210,7 @@ buttonPreviousIcon            CSTRING(255)
 headerRegionFEQ SIGNED
 
 ! Methods
-Init                          PROCEDURE(WindowManager pWM, SIGNED pSheetFeq, BYTE pHideCaption=FALSE) ,DERIVED 
+Init                          PROCEDURE(WindowManager pWM, SIGNED pSheetFeq, BYTE pSkipChecksAndOptions=FALSE, BYTE pHideCaption=FALSE) ,DERIVED 
 MoveOriginalControls          PROCEDURE(),VIRTUAL
 CreateControls                PROCEDURE(),VIRTUAL
 SetupWindow                   PROCEDURE(),VIRTUAL
