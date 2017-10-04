@@ -193,9 +193,11 @@ windowStyle LONG
   SELF.ApplyColors(SELF.darkColor, SELF.lightColor)
 
   IF pHideCaption = TRUE
+    0{PROP:Resize} = FALSE
     windowStyle = GetWindowLong(0{PROP:Handle}, GWL_STYLE)
     windowStyle = BXOR(windowStyle, WS_CAPTION)
-    windowStyle = BXOR(windowStyle, WS_THICKFRAME)
+    !windowStyle = BXOR(windowStyle, WS_BORDER)          ! Thin frame - black
+    !windowStyle = BXOR(windowStyle, WS_THICKFRAME)
     IF SetWindowLong(0{PROP:Handle}, GWL_STYLE, windowStyle) = 0
       Stop('GWL_STYLE Error: ' & GetLastError())
     END
