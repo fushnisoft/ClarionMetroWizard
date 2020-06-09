@@ -267,6 +267,9 @@ posG                                Group(PositionGroup)
   SELF.boxListTitleFeq{PROP:XPos} = 0
   SELF.boxListTitleFeq{PROP:YPos} = SELF.boxHeaderFeq{PROP:Height}
   SELF.boxListTitleFeq{PROP:Width} = SELF.listFeq{PROP:Width}+1
+  ! How does this event work!
+  ! SELF.boxListTitleFeq{PROP:NoHeight} = TRUE
+  SELF.boxListTitleFeq{PROP:Height} = SELF.promptListTitleFeq{PROP:Height} + 12
   
   SELF.listFeq{PROP:YPos} = SELF.boxHeaderFeq{PROP:Height} + SELF.boxListTitleFeq{PROP:Height} - 1
   SELF.listFeq{PROP:Height} = SELF.boxFooterFeq{PROP:YPos} - SELF.listFeq{PROP:YPos} 
@@ -277,7 +280,7 @@ posG                                Group(PositionGroup)
   SELF.listFeq{PROP:Width} = SELF.listFeq{PROP:Width} + 1
 
   SELF.promptListTitleFeq{PROP:XPos} = 8
-  SELF.promptListTitleFeq{PROP:YPos} = SELF.boxListTitleFeq{PROP:YPos} + (SELF.boxListTitleFeq{PROP:Height}/3)
+  SELF.promptListTitleFeq{PROP:YPos} = SELF.boxListTitleFeq{PROP:YPos} + ((SELF.boxListTitleFeq{PROP:Height}-SELF.promptListTitleFeq{PROP:Height})/2)
   
   SELF.listFeq{PROP:Trn} = FALSE
   
@@ -379,6 +382,13 @@ windowBorder SIGNED
   SELF.promptHeaderFeq{PROP:FontSize} = SELF.headerFontSize
   SELF.promptHeaderFeq{PROP:Text} = 'Header'
   SELF.promptHeaderFeq{PROP:Hide} = FALSE
+
+  ! Make sure the header is actually big enough to fit the prompt!
+  ! 2+2 --> This is a 2 pixel padding above and below
+  ! 6 --> This is because of the SELF.promptHeaderFeq{PROP:Ypos} = 6 later on in SetupWindow
+  ! Yeaah, I know
+  SELF.headerHeight = SELF.promptHeaderFeq{PROP:YPos} + SELF.promptHeaderFeq{PROP:Height} + 2+2+6
+  SELF.boxHeaderFeq{PROP:Height} = SELF.headerHeight
 
   SELF.promptFooterFeq = CREATE(0, CREATE:prompt)
   SELF.promptFooterFeq{PROP:FontSize} = SELF.footerFontSize
